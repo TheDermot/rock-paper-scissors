@@ -8,8 +8,8 @@ const scissors = 'scissors';
 
 //Scores
 
-let computerScore = '0';
-let humanScore = '0';
+let computerScore = 0;
+let humanScore = 0;
 
 //rounds
 
@@ -67,8 +67,17 @@ const playRound = () => {
     return computerScore++;
   }
 };
+const wannaPlay = () => {
+  let playChoice = prompt('Do you want to play? Enter 1 for YES or 2 for NO');
+  if (playChoice === '1') return true;
+  else if (playChoice === '2') return false;
+  else console.log(alert('Invalid Entry, Please refresh to try again'));
+};
 
+//playGame function loops playRound
 const playGame = rounds => {
+  let playChoice = wannaPlay();
+  if (!playChoice) return;
   let round = 1;
   while (round <= rounds) {
     playRound();
