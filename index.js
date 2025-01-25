@@ -49,24 +49,26 @@ const playRound = () => {
     console.log('Tie');
   } else if (computerSelection === paper && humanSelection === rock) {
     console.log('Paper beats rock. Computer wins round');
-    return computerScore++;
+    computerScore++;
   } else if (computerSelection === paper && humanSelection === scissors) {
     console.log('Scissors beats paper. Human wins round');
-    return humanScore++;
+    humanScore++;
   } else if (computerSelection === rock && humanSelection === scissors) {
     console.log('Rock beats scissors. Computer wins round');
-    return computerScore++;
+    computerScore++;
   } else if (computerSelection === rock && humanSelection === paper) {
     console.log('Paper beats rock. Human wins round');
-    return humanScore++;
+    humanScore++;
   } else if (computerSelection === scissors && humanSelection === rock) {
     console.log('Rock beats scissors. Human wins round');
-    return humanScore++;
+    humanScore++;
   } else if (computerSelection === scissors && humanSelection === paper) {
     console.log('Scissors beats paper. Computer wins round');
-    return computerScore++;
+    computerScore++;
   }
 };
+
+//Function checks if user wants to play
 const wannaPlay = () => {
   let playChoice = prompt('Do you want to play? Enter 1 for YES or 2 for NO');
   if (playChoice === '1') return true;
