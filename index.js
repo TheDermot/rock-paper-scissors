@@ -1,5 +1,3 @@
-console.log('hello dad');
-
 //3 string choices for game
 
 const rock = 'rock';
