@@ -11,11 +11,11 @@ const scissors = 'scissors';
 let computerScore = 0;
 let humanScore = 0;
 
-//rounds
+//number of rounds to play
 
 const rounds = 5;
 
-//choice func
+//functions
 
 const getComputerChoice = () => {
   let choice = Math.floor(Math.random() * 3) + 1; //random number from 1 to 3
@@ -25,29 +25,28 @@ const getComputerChoice = () => {
 };
 
 const getHumanChoice = () => {
-  let humanChoice = prompt('Rock(1), Paper(2), or Scissors(3)? Please enter the corresponding number.');
+  let humanChoice = prompt(
+    'Rock(1), Paper(2), or Scissors(3)? Please enter the corresponding number.'
+  );
   if (humanChoice === '1') return rock;
   else if (humanChoice === '2') return paper;
   else if (humanChoice === '3') return scissors;
   else {
-    alert('Invalid input. Please enter 1 for Rock, 2 for Paper, or 3 for Scissors.');
+    alert(
+      'Invalid input. Please enter 1 for Rock, 2 for Paper, or 3 for Scissors.'
+    );
     return getHumanChoice(); // Retrys input if invalid
   }
 };
 
-//function to play round
 const playRound = () => {
-  //set variable to human choice
-
   const humanSelection = getHumanChoice();
   console.log(humanSelection);
-
-  //set variable to computer choice
 
   const computerSelection = getComputerChoice();
   console.log(computerSelection);
 
-  //Determine winner or tie
+  //Determine winner or tie though else if statements and then iterates score
 
   if (computerSelection === humanSelection) {
     console.log('Tie');
@@ -72,7 +71,6 @@ const playRound = () => {
   }
 };
 
-//Function checks if user wants to play
 const wannaPlay = () => {
   let playChoice = prompt('Do you want to play? Enter 1 for YES or 2 for NO');
   if (playChoice === '1') return true;
@@ -83,14 +81,16 @@ const wannaPlay = () => {
   }
 };
 
-//playGame function loops playRound
+//First checks if user wants to play then loops 5 rounds
 const playGame = rounds => {
   let playChoice = wannaPlay();
   if (!playChoice) return;
   let round = 1;
   while (round <= rounds) {
     playRound();
-    console.log(`Round ${round}: Human: ${humanScore} Computer: ${computerScore}`);
+    console.log(
+      `Round ${round}: Human: ${humanScore} Computer: ${computerScore}`
+    );
     round++;
   }
   console.log(`Game Over: Human: ${humanScore} Computer: ${computerScore}`);
