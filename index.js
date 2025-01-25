@@ -29,6 +29,10 @@ const getHumanChoice = () => {
   if (humanChoice === '1') return rock;
   else if (humanChoice === '2') return paper;
   else if (humanChoice === '3') return scissors;
+  else {
+    alert('Invalid input. Please enter 1 for Rock, 2 for Paper, or 3 for Scissors.');
+    return getHumanChoice(); // Retrys input if invalid
+  }
 };
 
 //function to play round
@@ -73,7 +77,10 @@ const wannaPlay = () => {
   let playChoice = prompt('Do you want to play? Enter 1 for YES or 2 for NO');
   if (playChoice === '1') return true;
   else if (playChoice === '2') return false;
-  else console.log(alert('Invalid Entry, Please refresh to try again'));
+  else {
+    alert('Invalid Entry, Please refresh to try again');
+    return wannaPlay(); // Retrys input if invalid
+  }
 };
 
 //playGame function loops playRound
