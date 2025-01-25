@@ -15,17 +15,14 @@ let humanScore = '0';
 
 const rounds = 5;
 
+//choice func
+
 const getComputerChoice = () => {
   let choice = Math.floor(Math.random() * 3) + 1; //random number from 1 to 3
   if (choice === 1) return rock;
   else if (choice === 2) return paper;
   else if (choice === 3) return scissors;
 };
-
-//set variable to computer choice
-
-const computerSelection = getComputerChoice();
-console.log(computerSelection);
 
 const getHumanChoice = () => {
   let humanChoice = prompt('Rock(1), Paper(2), or Scissors(3)? Please enter the corresponding number.');
@@ -34,13 +31,20 @@ const getHumanChoice = () => {
   else if (humanChoice === '3') return scissors;
 };
 
-//set variable to human choice
-
-const humanSelection = getHumanChoice();
-console.log(humanSelection);
-
 //function to play round
-const playRound = (computerSelection, humanSelection) => {
+const playRound = () => {
+  //set variable to human choice
+
+  const humanSelection = getHumanChoice();
+  console.log(humanSelection);
+
+  //set variable to computer choice
+
+  const computerSelection = getComputerChoice();
+  console.log(computerSelection);
+
+  //Determine winner or tie
+
   if (computerSelection === humanSelection) {
     console.log('Tie');
   } else if (computerSelection === paper && humanSelection === rock) {
@@ -63,3 +67,15 @@ const playRound = (computerSelection, humanSelection) => {
     return computerScore++;
   }
 };
+
+const playGame = rounds => {
+  let round = 1;
+  while (round <= rounds) {
+    playRound();
+    console.log(`Round ${round}: Human: ${humanScore} Computer: ${computerScore}`);
+    round++;
+  }
+  console.log(`Game Over: Human: ${humanScore} Computer: ${computerScore}`);
+};
+
+playGame(rounds);
