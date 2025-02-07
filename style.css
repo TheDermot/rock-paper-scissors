@@ -61,11 +61,22 @@ body {
   justify-content: space-evenly;
   color: rgb(182, 83, 83);
   font: 2em "Pixelify Sans";
+  position: relative;
+  top: -100%;
+  animation: welcomeDown 4s ease forwards;
 }
 .welcome-screen button {
   font: 1.6em Pixelify Sans;
   background-color: #d6d467c5;
   padding: 5px;
+}
+@keyframes welcomeDown {
+  from {
+    top: -100%;
+  }
+  to {
+    top: 0;
+  }
 }
 
 .platform {
