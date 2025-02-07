@@ -48,22 +48,42 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  overflow: hidden;
 }
 .platform {
   width: 100%;
   height: 9%;
+}
+.arena {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border: green 1px solid;
 }
 .knight {
   width: 32px; /* Width of a single frame */
   height: 32px; /* Height of a single frame */
   background: url("./images/knight-walk.png") no-repeat;
   image-rendering: pixelated; /* Keep it sharp */
-  animation: walk 1s steps(6) forwards; /* Animate with steps */
+  animation: walk 1s steps(6) 1 forwards; /* Animate with steps */
   transform: scale(3);
   margin-left: 15px;
   position: relative;
+  right: 20%;
 }
-
+.necromancer {
+  width: 130px; /* Width of a single frame */
+  height: 74px; /* Height of a single frame */
+  background: url("./images/necromancer-run.png") no-repeat;
+  image-rendering: pixelated; /* Keep it sharp */
+  animation: necroRun 1.5s steps(8) 1 both; /* Animate with steps */
+  transform: scale(3);
+  margin-right: 15px;
+  position: relative;
+  left: 40%;
+}
 @keyframes walk {
   from {
     background-position: 0 0;
@@ -71,6 +91,15 @@ body {
   } /* Start at first frame */
   to {
     background-position: -192px 0;
-    left: 20%;
+    left: 35%;
   } /* Move through all frames (6 frames * 32px) */
+}
+@keyframes necroRun {
+  from {
+    background-position: -1158px 0;
+  } /* Start at first frame */
+  to {
+    background-position: 0 0;
+    left: -10%;
+  } /* Move through all frames (8 frames * 80px) */
 }
