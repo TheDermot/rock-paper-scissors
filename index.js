@@ -94,6 +94,18 @@ const wannaPlay = () => {
 //   console.log(`Game Over: Human: ${humanScore} Computer: ${computerScore}`);
 // };
 
-playGame(rounds);
+// playGame(rounds);
 
 //Dom Man
+
+const welcomeScreen = document.querySelector(".welcome-screen");
+console.log(welcomeScreen);
+const play = document.querySelector("#playBtn");
+const knight = document.querySelector(".knight");
+
+play.addEventListener("click", () => {
+  console.log("e");
+  welcomeScreen.classList.remove("welcome-screen-entrance");
+  welcomeScreen.classList.add("welcome-screen-hide");
+  knight.classList.add("knight-entrance");
+});
