@@ -63,7 +63,7 @@ body {
   justify-content: space-evenly;
   color: rgb(182, 83, 83);
   font: 2em "Pixelify Sans";
-  transform: translateY(-100%);
+  /* transform: translateY(-100%); */
   position: absolute;
   z-index: 2;
 }
@@ -78,9 +78,9 @@ body {
   cursor: pointer;
   border-radius: 5%;
 }
-.welcome-screen-entrance {
+/* .welcome-screen-entrance {
   animation: welcomeDown 3s ease-out forwards;
-}
+} */
 
 .welcome-screen-hide {
   animation: welcomeUp 2s ease-out forwards;
@@ -145,25 +145,31 @@ body {
 }
 
 .necromancer {
-  width: 130px;
+  width: 160px;
   height: 74px;
   background: url("./images/necromancer-run.png") no-repeat;
   image-rendering: pixelated;
   transform: scale(3);
-  margin-right: 15px;
   position: relative;
-  left: 40%;
 }
 .necromancer-entrance {
-  animation: necroRun 1.5s steps(8) 1 forwards;
+  animation: necroRun 1s steps(7) 4 forwards reverse,
+    necroMove 4s linear 1 forwards;
 }
 
 @keyframes necroRun {
   from {
-    background-position: -1158px 0;
+    background-position: -1120px 0;
   }
   to {
     background-position: 0 0;
-    left: -10%;
+  }
+}
+@keyframes necroMove {
+  from {
+    right: 0%;
+  }
+  to {
+    right: 30%;
   }
 }
