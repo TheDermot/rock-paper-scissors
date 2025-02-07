@@ -127,19 +127,6 @@ body {
 .knight-entrance {
   animation: knightWalk 1s steps(7) 4 forwards, knightMove 4s linear 1 forwards;
 }
-.necromancer {
-  width: 130px;
-  height: 74px;
-  background: url("./images/necromancer-run.png") no-repeat;
-  image-rendering: pixelated;
-  transform: scale(3);
-  margin-right: 15px;
-  position: relative;
-  left: 40%;
-}
-.necromancer-entrance {
-  animation: necroRun 1.5s steps(8) 1 forwards;
-}
 @keyframes knightWalk {
   from {
     background-position: 0px 0;
@@ -155,6 +142,20 @@ body {
   to {
     left: 30%;
   }
+}
+
+.necromancer {
+  width: 130px;
+  height: 74px;
+  background: url("./images/necromancer-run.png") no-repeat;
+  image-rendering: pixelated;
+  transform: scale(3);
+  margin-right: 15px;
+  position: relative;
+  left: 40%;
+}
+.necromancer-entrance {
+  animation: necroRun 1.5s steps(8) 1 forwards;
 }
 
 @keyframes necroRun {

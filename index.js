@@ -102,10 +102,12 @@ const welcomeScreen = document.querySelector(".welcome-screen");
 console.log(welcomeScreen);
 const play = document.querySelector("#playBtn");
 const knight = document.querySelector(".knight");
+const necromancer = document.querySelector(".necromancer");
 
 play.addEventListener("click", () => {
   console.log("e");
   welcomeScreen.classList.remove("welcome-screen-entrance");
   welcomeScreen.classList.add("welcome-screen-hide");
   knight.classList.add("knight-entrance");
+  necromancer.classList.add("necromancer-entrance");
 });
