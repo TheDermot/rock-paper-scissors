@@ -148,22 +148,6 @@ body {
     left: 30%;
   }
 }
-.knight-text{
-  position: relative;
-  border: 5px solid;
-  border-image: url(/images/borderText.png) 15 fill;
-  color: rgba(213, 201, 201, 0.842);
-  display: flex;
-  width: 80px;
-  bottom: 2em;
-  left: 1.35em;
-}
-.knight-text p{
-  width: 100%;
-  max-height: 20px;
-  font-size: 10px;
-  font-size: 6px;
-}
 
 .necromancer {
   width: 160px;
@@ -172,7 +156,7 @@ body {
   image-rendering: pixelated;
   transform: scale(3);
   position: relative;
-  right: -15%;
+  /* right: -15%; */
 }
 .necromancer-entrance {
   animation: necroRun 1s steps(7) 4 forwards reverse,
@@ -194,4 +178,40 @@ body {
   to {
     right: 30%;
   }
+}
+
+.knight-text {
+  position: relative;
+  border: 5px solid;
+  border-image: url(/images/borderText.png) 15 fill;
+  color: rgba(213, 201, 201, 0.842);
+  display: flex;
+  width: 4rem;
+  height: max(1.5rem);
+  bottom: 1.5em;
+  left: 1.35em;
+  overflow: hidden;
+}
+.knight-text p {
+  width: 100%;
+  font-size: 10px;
+  font-size: 6px;
+}
+.necromancer-text {
+  position: relative;
+  border: 5px solid;
+  border-image: url(/images/borderText.png) 15 fill;
+  color: rgba(213, 201, 201, 0.842);
+  display: flex;
+  width: 4rem;
+  height: max(1.5rem);
+  bottom: 1.6em;
+  left: 0.9em;
+  overflow: hidden;
+}
+.necromancer-text p {
+  width: 100%;
+  max-height: 20px;
+  font-size: 10px;
+  font-size: 6px;
 }
