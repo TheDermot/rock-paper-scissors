@@ -69,14 +69,18 @@ body {
 }
 .welcome-screen button {
   font: 1.6em Pixelify Sans;
-  background-color: #d6d467c5;
+  background-color: transparent;
   padding: 0.25rem 1.5rem;
   transition: 1s;
+  border: 0.6em solid;
+  border-image: url(/images/borderText.png) 15 fill;
+  color: rgba(213, 201, 201, 0.842);
 }
 .welcome-screen button:hover {
-  background-color: rgba(250, 248, 215, 0.704);
   cursor: pointer;
-  border-radius: 5%;
+  color: rgba(255, 255, 255, 0.986);
+  padding-left: 0;
+  padding-right: 0;
 }
 /* .welcome-screen-entrance {
   animation: welcomeDown 3s ease-out forwards;
@@ -122,7 +126,8 @@ body {
   image-rendering: pixelated;
   transform: scale(3);
   position: relative;
-  right: 20%;
+  /* right: 20%; */
+  left: 20%;
 }
 .knight-entrance {
   animation: knightWalk 1s steps(7) 4 forwards, knightMove 4s linear 1 forwards;
@@ -143,6 +148,22 @@ body {
     left: 30%;
   }
 }
+.knight-text{
+  position: relative;
+  border: 5px solid;
+  border-image: url(/images/borderText.png) 15 fill;
+  color: rgba(213, 201, 201, 0.842);
+  display: flex;
+  width: 80px;
+  bottom: 2em;
+  left: 1.35em;
+}
+.knight-text p{
+  width: 100%;
+  max-height: 20px;
+  font-size: 10px;
+  font-size: 6px;
+}
 
 .necromancer {
   width: 160px;
@@ -151,6 +172,7 @@ body {
   image-rendering: pixelated;
   transform: scale(3);
   position: relative;
+  right: -15%;
 }
 .necromancer-entrance {
   animation: necroRun 1s steps(7) 4 forwards reverse,
