@@ -169,6 +169,7 @@ const playGame = () => {
       const humanChoice = handleAttackChoice(event);
       const computerChoice = getComputerChoice();
       playRound(humanChoice, computerChoice);
+      console.log(`Human: ${humanScore} , Computer: ${computerScore}`);
     });
   });
 };
