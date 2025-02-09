@@ -206,19 +206,31 @@ body {
 
 .choose-attack {
   border: 1px red solid;
-  width: 20%;
-  height: auto;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
-  gap: 40px;
+  align-items: center;
+  position: absolute;
+  z-index: 3;
 }
-.choose-attack div {
+.attacks {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ gap: 3rem; 
+ height: 10rem;
+ width: 15em;
+ border-image: url(/images/borderText.png) 15 fill;
+}
+.attacks div {
   width: 20px;
   height: 26px;
   transform: scale(3);
   image-rendering: pixelated;
+  border: 1px green solid;
 }
-.choose-attack div:hover {
+.attacks div:hover {
   cursor: pointer;
 }
 .paper {
