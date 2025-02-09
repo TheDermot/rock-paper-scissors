@@ -1,58 +1,24 @@
-// const wannaPlay = () => {
-//   let playChoice = prompt("Do you want to play? Enter 1 for YES or 2 for NO");
-//   if (playChoice === "1") return true;
-//   else if (playChoice === "2") return false;
-//   else {
-//     alert("Invalid Entry, Please refresh to try again");
-//     return wannaPlay(); // Retrys input if invalid
-//   }
-// };
-
-//First checks if user wants to play then loops 5 rounds
-// const playGame = rounds => {
-//   let playChoice = wannaPlay();
-//   if (!playChoice) return;
-//   let round = 1;
-//   while (round <= rounds) {
-//     playRound();
-//     console.log(
-//       `Round ${round}: Human: ${humanScore} Computer: ${computerScore}`
-//     );
-//     round++;
-//   }
-//   console.log(`Game Over: Human: ${humanScore} Computer: ${computerScore}`);
-// };
-
-// playGame(rounds);
-
-//Dom Man
-
 const welcomeScreen = document.querySelector(".welcome-screen");
-console.log(welcomeScreen);
 const play = document.querySelector("#playBtn");
 const knight = document.querySelector(".knight");
 const necromancer = document.querySelector(".necromancer");
 
 const knightText = document.querySelector(".knight-text");
 const necromancerText = document.querySelector(".necromancer-text");
-const attackBox = document.querySelector(".attacks")
+const attackBox = document.querySelector(".attacks");
 
 play.addEventListener("click", () => {
-  console.log("e");
   welcomeScreen.classList.remove("welcome-screen-entrance");
   welcomeScreen.classList.add("welcome-screen-hide");
   knight.classList.add("knight-entrance");
 
-  // First timeout: 2 seconds
   setTimeout(() => {
     knightText.classList.remove("hideItem");
-    startNextDialogue(); // Start the dialogue
+    startNextDialogue();
 
-    // Second timeout: 2 seconds after the first (total 4 seconds)
     setTimeout(() => {
       necromancer.classList.add("necromancer-entrance");
 
-      // Third timeout: 0 seconds after the second (total 4 seconds)
       setTimeout(() => {
         necromancerText.classList.remove("hideItem");
       }, 2000);
@@ -60,13 +26,8 @@ play.addEventListener("click", () => {
   }, 3000);
 });
 
-//dialogue
-
 const dialogues = [
-  {
-    speaker: "Knight",
-    text: "Man, these are some nice trees",
-  },
+  { speaker: "Knight", text: "Man, these are some nice trees" },
   { speaker: "Necromancer", text: "Who dare trespasses into my domain?" },
   { speaker: "Knight", text: "What is a domain?" },
   {
@@ -103,39 +64,31 @@ const necromancerTextBox = document.querySelector(".necromancer-text p");
 
 let dialogueIndex = 0;
 let charIndex = 0;
-let typingSpeed = 60; //50ms paause between each char
+let typingSpeed = 60;
 let isTyping = false;
-
-//typewriter like typing, uses recursion w SetTimeout to loop until nomore char are left
-//secpmd setTimeout calls the function again to move to next dialogue
 
 const typeText = () => {
   if (dialogueIndex >= dialogues.length) {
+    knightText.classList.add("hideItem");
+    necromancerText.classList.add("hideItem");
+    attackBox.classList.remove("hideItem");
     return;
   }
+
   const currentDialogue = dialogues[dialogueIndex];
-  if (currentDialogue.speaker === "Knight") {
-    textBox = knightTextBox;
-  } else {
-    textBox = necromancerTextBox;
-  }
+  const textBox =
+    currentDialogue.speaker === "Knight" ? knightTextBox : necromancerTextBox;
 
   if (charIndex === 0) {
     textBox.textContent = "";
   }
-  // Check if the text box has overflowed vertically
+
   if (textBox.scrollHeight > textBox.clientHeight) {
-    // Find the last space in the text to avoid splitting words
     const lastSpaceIndex = textBox.textContent.lastIndexOf(" ");
-
     if (lastSpaceIndex !== -1) {
-      // Save the remaining text (after the last space)
       const remainingText = textBox.textContent.slice(lastSpaceIndex + 1);
-
-      // Clear the text box and add the remaining text
       textBox.textContent = remainingText;
     } else {
-      // If there's no space (e.g., a very long word), clear the text box
       textBox.textContent = "";
     }
   }
@@ -151,11 +104,6 @@ const typeText = () => {
 
     if (dialogueIndex < dialogues.length) {
       setTimeout(startNextDialogue, 1000);
-    } else {
-      knightText.classList.add("hideItem"); //dialogue ends
-      necromancerText.classList.add("hideItem");
-      attackBox.classList.remove("hideItem")
-      return;
     }
   }
 };
@@ -167,63 +115,31 @@ const startNextDialogue = () => {
   }
 };
 
-// knight.addEventListener("animationend", () => {
-//   startNextDialogue();
-//   necromancer.classList.add("necromancer-entrance");
-// });
-
-//3 string choices for game
-
 const rock = "rock";
 const paper = "paper";
 const scissors = "scissors";
 
 const attacks = document.querySelectorAll(".attacks div");
-
-//Scores
+const startButton = document.querySelector(".attacks button");
 
 let computerScore = 0;
 let humanScore = 0;
 
-//number of rounds to play
-
-const rounds = 3;
-
 const handleAttackChoice = (event) => {
   const humanChoice = event.target.classList[0]; // Gets "paper", "rock", or "scissors"
   console.log(`You chose: ${humanChoice}`);
-  // Add game logic here
+  return humanChoice; // Return the choice
 };
-
-attacks.forEach((attack) => {
-  attack.addEventListener("click", handleAttackChoice);
-  attack.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-      handleAttackChoice(event);
-    }
-  });
-});
-
-
 
 const getComputerChoice = () => {
-  let choice = Math.floor(Math.random() * 3) + 1; //random number from 1 to 3
-  if (choice === 1) return rock;
-  else if (choice === 2) return paper;
-  else if (choice === 3) return scissors;
+  let computerChoice = Math.floor(Math.random() * 3) + 1;
+  console.log(`Computer chose: ${computerChoice}`);
+  if (computerChoice === 1) return rock;
+  else if (computerChoice === 2) return paper;
+  else if (computerChoice === 3) return scissors;
 };
 
-
-
-const playRound = () => {
-  const humanSelection = getHumanChoice();
-  console.log(humanSelection);
-
-  const computerSelection = getComputerChoice();
-  console.log(computerSelection);
-
-  //Determine winner or tie though else if statements and then iterates score
-
+const playRound = (humanSelection, computerSelection) => {
   if (computerSelection === humanSelection) {
     console.log("Tie");
   } else if (computerSelection === paper && humanSelection === rock) {
@@ -246,3 +162,21 @@ const playRound = () => {
     computerScore++;
   }
 };
+
+const playGame = () => {
+  attacks.forEach((attack) => {
+    attack.addEventListener("click", (event) => {
+      const humanChoice = handleAttackChoice(event);
+      const computerChoice = getComputerChoice();
+      playRound(humanChoice, computerChoice);
+    });
+  });
+};
+
+startButton.addEventListener("click", () => {
+  startButton.classList.add("hideItem");
+  attacks.forEach((attack) => {
+    attack.classList.remove("hideItem");
+  });
+  playGame();
+});

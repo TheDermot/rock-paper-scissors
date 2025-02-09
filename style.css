@@ -224,6 +224,17 @@ body {
  border: 30px solid;
  border-image: url(/images/borderText.png) 15 fill;
 }
+.attacks button{
+  border: none;
+  padding: 0;
+  background: none;
+  font: 3em "Pixelify Sans";
+  color: rgb(191, 173, 173);
+}
+.attacks button:hover{
+  font-size: 3.5em;
+  cursor: pointer;
+}
 .attacks div {
   width: 20px;
   height: 26px;
