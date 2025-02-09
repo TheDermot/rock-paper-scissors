@@ -35,6 +35,7 @@ const necromancer = document.querySelector(".necromancer");
 
 const knightText = document.querySelector(".knight-text");
 const necromancerText = document.querySelector(".necromancer-text");
+const attackBox = document.querySelector(".attacks")
 
 play.addEventListener("click", () => {
   console.log("e");
@@ -151,8 +152,9 @@ const typeText = () => {
     if (dialogueIndex < dialogues.length) {
       setTimeout(startNextDialogue, 1000);
     } else {
-      knightText.classList.add("hideItem");
+      knightText.classList.add("hideItem"); //dialogue ends
       necromancerText.classList.add("hideItem");
+      attackBox.classList.remove("hideItem")
       return;
     }
   }
@@ -176,6 +178,8 @@ const rock = "rock";
 const paper = "paper";
 const scissors = "scissors";
 
+const attacks = document.querySelectorAll(".attacks div");
+
 //Scores
 
 let computerScore = 0;
@@ -183,9 +187,24 @@ let humanScore = 0;
 
 //number of rounds to play
 
-const rounds = 5;
+const rounds = 3;
 
-//functions
+const handleAttackChoice = (event) => {
+  const humanChoice = event.target.classList[0]; // Gets "paper", "rock", or "scissors"
+  console.log(`You chose: ${humanChoice}`);
+  // Add game logic here
+};
+
+attacks.forEach((attack) => {
+  attack.addEventListener("click", handleAttackChoice);
+  attack.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      handleAttackChoice(event);
+    }
+  });
+});
+
+
 
 const getComputerChoice = () => {
   let choice = Math.floor(Math.random() * 3) + 1; //random number from 1 to 3
@@ -194,20 +213,7 @@ const getComputerChoice = () => {
   else if (choice === 3) return scissors;
 };
 
-const getHumanChoice = () => {
-  let humanChoice = prompt(
-    "Rock(1), Paper(2), or Scissors(3)? Please enter the corresponding number."
-  );
-  if (humanChoice === "1") return rock;
-  else if (humanChoice === "2") return paper;
-  else if (humanChoice === "3") return scissors;
-  else {
-    alert(
-      "Invalid input. Please enter 1 for Rock, 2 for Paper, or 3 for Scissors."
-    );
-    return getHumanChoice(); // Retrys input if invalid
-  }
-};
+
 
 const playRound = () => {
   const humanSelection = getHumanChoice();
