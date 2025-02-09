@@ -145,39 +145,69 @@ const playRound = (humanSelection, computerSelection) => {
   } else if (computerSelection === paper && humanSelection === rock) {
     console.log("Paper beats rock. Computer wins round");
     computerScore++;
+    checkWinner(humanScore, computerScore);
   } else if (computerSelection === paper && humanSelection === scissors) {
     console.log("Scissors beats paper. Human wins round");
     humanScore++;
+    checkWinner(humanScore, computerScore);
   } else if (computerSelection === rock && humanSelection === scissors) {
     console.log("Rock beats scissors. Computer wins round");
     computerScore++;
+    checkWinner(humanScore, computerScore);
   } else if (computerSelection === rock && humanSelection === paper) {
     console.log("Paper beats rock. Human wins round");
     humanScore++;
+    checkWinner(humanScore, computerScore);
   } else if (computerSelection === scissors && humanSelection === rock) {
     console.log("Rock beats scissors. Human wins round");
     humanScore++;
+    checkWinner(humanScore, computerScore);
   } else if (computerSelection === scissors && humanSelection === paper) {
     console.log("Scissors beats paper. Computer wins round");
     computerScore++;
+    checkWinner(humanScore, computerScore);
   }
 };
 
-const playGame = () => {
+const checkWinner = (humanScore, computerScore) => {
+  if (computerScore === winsNeeded) {
+    console.log(`Winner: Computer. Score: ${computerScore}`);
+    endGame();
+  } else if (humanScore === winsNeeded) {
+    console.log(`Winner: Human. Score: ${humanScore}`);
+    endGame();
+  } else return;
+};
+
+const endGame = () => {
   attacks.forEach((attack) => {
-    attack.addEventListener("click", (event) => {
-      const humanChoice = handleAttackChoice(event);
-      const computerChoice = getComputerChoice();
-      playRound(humanChoice, computerChoice);
-      console.log(`Human: ${humanScore} , Computer: ${computerScore}`);
-    });
+    attack.removeEventListener("click", handleAttackClick);
+  });
+};
+
+const winsNeeded = 3;
+
+const handleAttackClick = (event) => {
+  const humanChoice = handleAttackChoice(event);
+  const computerChoice = getComputerChoice();
+  if (computerScore < winsNeeded && humanScore < winsNeeded) {
+    playRound(humanChoice, computerChoice);
+    console.log(`Human: ${humanScore} , Computer: ${computerScore}`);
+  } else {
+  }
+};
+
+const playGame = (winsNeeded) => {
+  attacks.forEach((attack) => {
+    attack.addEventListener("click", handleAttackClick);
   });
 };
 
 startButton.addEventListener("click", () => {
+  console.log("START");
   startButton.classList.add("hideItem");
   attacks.forEach((attack) => {
     attack.classList.remove("hideItem");
   });
-  playGame();
+  playGame(winsNeeded);
 });
