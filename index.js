@@ -47,7 +47,7 @@ const dialogues = [
   },
   {
     speaker: "Knight",
-    text: "Ooo, a master. Then we must play. 3 rounds. If I win you let me pass and I'll be on my merry way. If I lose, you may kill me",
+    text: "Ooo, a master. Then we must play. First one to 3 wins. If I win you let me pass and I'll be on my merry way. If I lose, you may kill me",
   },
   {
     speaker: "Necromancer",

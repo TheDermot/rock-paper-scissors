@@ -240,10 +240,10 @@ body {
   height: 26px;
   transform: scale(3);
   image-rendering: pixelated;
-  border: 1px green solid;
 }
 .attacks div:hover {
   cursor: pointer;
+  transform: scale(3.5);
 }
 .paper {
   background: url(./images/paper.png) no-repeat;
