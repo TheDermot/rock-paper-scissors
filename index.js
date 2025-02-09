@@ -104,11 +104,30 @@ const play = document.querySelector("#playBtn");
 const knight = document.querySelector(".knight");
 const necromancer = document.querySelector(".necromancer");
 
+const knightText = document.querySelector(".knight-text");
+const necromancerText = document.querySelector(".necromancer-text");
+
 play.addEventListener("click", () => {
   console.log("e");
   welcomeScreen.classList.remove("welcome-screen-entrance");
   welcomeScreen.classList.add("welcome-screen-hide");
   knight.classList.add("knight-entrance");
+
+  // First timeout: 2 seconds
+  setTimeout(() => {
+    knightText.classList.remove("hideItem");
+    startNextDialogue(); // Start the dialogue
+
+    // Second timeout: 2 seconds after the first (total 4 seconds)
+    setTimeout(() => {
+      necromancer.classList.add("necromancer-entrance");
+
+      // Third timeout: 0 seconds after the second (total 4 seconds)
+      setTimeout(() => {
+        necromancerText.classList.remove("hideItem");
+      }, 2000);
+    }, 1000);
+  }, 3000);
 });
 
 //dialogue
@@ -124,7 +143,8 @@ const dialogues = [
     speaker: "Necromancer",
     text: "Fool! None who enter leave alive. Wield your weapon now",
   },
-  { speaker: "Knight", text: "Uhh....I don't have one. Rock Paper Scissors?" },
+  { speaker: "Knight", text: "Uhh....I don't have one." },
+  { speaker: "Knight", text: "Rock Paper Scissors?" },
   { speaker: "Necromancer", text: "You dare insult me with childrens games." },
   {
     speaker: "Knight",
@@ -153,7 +173,7 @@ const necromancerTextBox = document.querySelector(".necromancer-text p");
 
 let dialogueIndex = 0;
 let charIndex = 0;
-let typingSpeed = 50; //50ms paause between each char
+let typingSpeed = 60; //50ms paause between each char
 let isTyping = false;
 
 //typewriter like typing, uses recursion w SetTimeout to loop until nomore char are left
@@ -210,7 +230,7 @@ const startNextDialogue = () => {
   }
 };
 
-knight.addEventListener("animationend", () => {
-  startNextDialogue();
-  necromancer.classList.add("necromancer-entrance");
-});
+// knight.addEventListener("animationend", () => {
+//   startNextDialogue();
+//   necromancer.classList.add("necromancer-entrance");
+// });
