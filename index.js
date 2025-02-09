@@ -109,5 +109,108 @@ play.addEventListener("click", () => {
   welcomeScreen.classList.remove("welcome-screen-entrance");
   welcomeScreen.classList.add("welcome-screen-hide");
   knight.classList.add("knight-entrance");
+});
+
+//dialogue
+
+const dialogues = [
+  {
+    speaker: "Knight",
+    text: "Man, these are some nice trees",
+  },
+  { speaker: "Necromancer", text: "Who dare trespasses into my domain?" },
+  { speaker: "Knight", text: "What is a domain?" },
+  {
+    speaker: "Necromancer",
+    text: "Fool! None who enter leave alive. Wield your weapon now",
+  },
+  { speaker: "Knight", text: "Uhh....I don't have one. Rock Paper Scissors?" },
+  { speaker: "Necromancer", text: "You dare insult me with childrens games." },
+  {
+    speaker: "Knight",
+    text: "Oh so you're just scared you'd lose to me in a childrens game",
+  },
+  {
+    speaker: "Necromancer",
+    text: "Silence, I was the master of Rock Paper Scissors in necromancy school.",
+  },
+  {
+    speaker: "Knight",
+    text: "Ooo, a master. Then we must play. 3 rounds. If I win you let me pass and I'll be on my merry way. If I lose, you may kill me",
+  },
+  {
+    speaker: "Necromancer",
+    text: "SSss, you intrique me human. Fine, I'll agree to these terms. Your death will be memorable",
+  },
+  { speaker: "Knight", text: "Ha, I'm sure it will be. Ok." },
+  { speaker: "Knight", text: "Rock" },
+  { speaker: "Knight", text: "Paper" },
+  { speaker: "Knight", text: "Scissors!" },
+];
+
+const knightTextBox = document.querySelector(".knight-text p");
+const necromancerTextBox = document.querySelector(".necromancer-text p");
+
+let dialogueIndex = 0;
+let charIndex = 0;
+let typingSpeed = 50; //50ms paause between each char
+let isTyping = false;
+
+//typewriter like typing, uses recursion w SetTimeout to loop until nomore char are left
+//secpmd setTimeout calls the function again to move to next dialogue
+
+const typeText = () => {
+  if (dialogueIndex >= dialogues.length) return;
+  const currentDialogue = dialogues[dialogueIndex];
+  if (currentDialogue.speaker === "Knight") {
+    textBox = knightTextBox;
+  } else {
+    textBox = necromancerTextBox;
+  }
+
+  if (charIndex === 0) {
+    textBox.textContent = "";
+  }
+  // Check if the text box has overflowed vertically
+  if (textBox.scrollHeight > textBox.clientHeight) {
+    // Find the last space in the text to avoid splitting words
+    const lastSpaceIndex = textBox.textContent.lastIndexOf(" ");
+
+    if (lastSpaceIndex !== -1) {
+      // Save the remaining text (after the last space)
+      const remainingText = textBox.textContent.slice(lastSpaceIndex + 1);
+
+      // Clear the text box and add the remaining text
+      textBox.textContent = remainingText;
+    } else {
+      // If there's no space (e.g., a very long word), clear the text box
+      textBox.textContent = "";
+    }
+  }
+
+  if (charIndex < currentDialogue.text.length) {
+    textBox.textContent += currentDialogue.text.charAt(charIndex);
+    charIndex++;
+    setTimeout(typeText, typingSpeed);
+  } else {
+    isTyping = false;
+    dialogueIndex++;
+    charIndex = 0;
+
+    if (dialogueIndex < dialogues.length) {
+      setTimeout(startNextDialogue, 1000);
+    }
+  }
+};
+
+const startNextDialogue = () => {
+  if (!isTyping) {
+    isTyping = true;
+    typeText();
+  }
+};
+
+knight.addEventListener("animationend", () => {
+  startNextDialogue();
   necromancer.classList.add("necromancer-entrance");
 });
