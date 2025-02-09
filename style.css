@@ -60,7 +60,7 @@ body {
   justify-content: space-evenly;
   color: rgb(182, 83, 83);
   font: 2em "Pixelify Sans";
-  /* transform: translateY(-100%); */
+  transform: translateY(-100%);
   position: absolute;
   z-index: 2;
 }
@@ -79,9 +79,9 @@ body {
   padding-left: 0;
   padding-right: 0;
 }
-/* .welcome-screen-entrance {
+.welcome-screen-entrance {
   animation: welcomeDown 3s ease-out forwards;
-} */
+}
 
 .welcome-screen-hide {
   animation: welcomeUp 2s ease-out forwards;
@@ -123,7 +123,7 @@ body {
   image-rendering: pixelated;
   transform: scale(3);
   position: relative;
-  right: 20%;
+  /* right: 20%; */
 }
 .knight-entrance {
   animation: knightWalk 1s steps(7) 4 forwards, knightMove 4s linear 1 forwards;
@@ -152,7 +152,7 @@ body {
   image-rendering: pixelated;
   transform: scale(3);
   position: relative;
-  right: -15%;
+  /* right: -15%; */
 }
 .necromancer-entrance {
   animation: necroRun 1s steps(7) 4 forwards reverse,

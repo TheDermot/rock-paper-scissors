@@ -3,8 +3,8 @@ const play = document.querySelector("#playBtn");
 const knight = document.querySelector(".knight");
 const necromancer = document.querySelector(".necromancer");
 
-const knightText = document.querySelector(".knight-text");
-const necromancerText = document.querySelector(".necromancer-text");
+const knightTextBox = document.querySelector(".knight-text");
+const necromancerTextBox = document.querySelector(".necromancer-text");
 const attackBox = document.querySelector(".attacks");
 
 play.addEventListener("click", () => {
@@ -13,15 +13,19 @@ play.addEventListener("click", () => {
   knight.classList.add("knight-entrance");
 
   setTimeout(() => {
-    knightText.classList.remove("hideItem");
-    startNextDialogue();
+    knightTextBox.classList.remove("hideItem");
+    typeText(dialogues, () => {
+      knightTextBox.classList.add("hideItem");
+      necromancerTextBox.classList.add("hideItem");
+      attackBox.classList.remove("hideItem");
+    });
 
     setTimeout(() => {
       necromancer.classList.add("necromancer-entrance");
 
       setTimeout(() => {
-        necromancerText.classList.remove("hideItem");
-      }, 2000);
+        necromancerTextBox.classList.remove("hideItem");
+      }, 3000);
     }, 1000);
   }, 3000);
 });
@@ -29,90 +33,88 @@ play.addEventListener("click", () => {
 const dialogues = [
   { speaker: "Knight", text: "Man, these are some nice trees" },
   { speaker: "Necromancer", text: "Who dare trespasses into my domain?" },
-  { speaker: "Knight", text: "What is a domain?" },
-  {
-    speaker: "Necromancer",
-    text: "Fool! None who enter leave alive. Wield your weapon now",
-  },
-  { speaker: "Knight", text: "Uhh....I don't have one." },
-  { speaker: "Knight", text: "Rock Paper Scissors?" },
-  { speaker: "Necromancer", text: "You dare insult me with childrens games." },
-  {
-    speaker: "Knight",
-    text: "Oh so you're just scared you'd lose to me in a childrens game",
-  },
-  {
-    speaker: "Necromancer",
-    text: "Silence, I was the master of Rock Paper Scissors in necromancy school.",
-  },
-  {
-    speaker: "Knight",
-    text: "Ooo, a master. Then we must play. First one to 3 wins. If I win you let me pass and I'll be on my merry way. If I lose, you may kill me",
-  },
-  {
-    speaker: "Necromancer",
-    text: "SSss, you intrique me human. Fine, I'll agree to these terms. Your death will be memorable",
-  },
-  { speaker: "Knight", text: "Ha, I'm sure it will be. Ok." },
-  { speaker: "Knight", text: "Rock" },
-  { speaker: "Knight", text: "Paper" },
-  { speaker: "Knight", text: "Scissors!" },
+  // { speaker: "Knight", text: "What is a domain?" },
+  // {
+  //   speaker: "Necromancer",
+  //   text: "Fool! None who enter leave alive. Wield your weapon now",
+  // },
+  // { speaker: "Knight", text: "Uhh....I don't have one." },
+  // { speaker: "Knight", text: "Rock Paper Scissors?" },
+  // { speaker: "Necromancer", text: "You dare insult me with childrens games." },
+  // {
+  //   speaker: "Knight",
+  //   text: "Oh so you're just scared you'd lose to me in a childrens game",
+  // },
+  // {
+  //   speaker: "Necromancer",
+  //   text: "Silence, I was the master of Rock Paper Scissors in necromancy school.",
+  // },
+  // {
+  //   speaker: "Knight",
+  //   text: "Ooo, a master. Then we must play. First one to 3 wins. If I win you let me pass and I'll be on my merry way. If I lose, you may kill me",
+  // },
+  // {
+  //   speaker: "Necromancer",
+  //   text: "SSss, you intrique me human. Fine, I'll agree to these terms. Your death will be memorable",
+  // },
+  // { speaker: "Knight", text: "Ha, I'm sure it will be. Ok." },
+  // { speaker: "Knight", text: "Rock" },
+  // { speaker: "Knight", text: "Paper" },
+  // { speaker: "Knight", text: "Scissors!" },
 ];
 
-const knightTextBox = document.querySelector(".knight-text p");
-const necromancerTextBox = document.querySelector(".necromancer-text p");
+const knightTxt = document.querySelector(".knight-text p");
+const necromancerTxt = document.querySelector(".necromancer-text p");
 
 let dialogueIndex = 0;
 let charIndex = 0;
-let typingSpeed = 60;
-let isTyping = false;
+let typingSpeed = 90;
 
-const typeText = () => {
-  if (dialogueIndex >= dialogues.length) {
-    knightText.classList.add("hideItem");
-    necromancerText.classList.add("hideItem");
-    attackBox.classList.remove("hideItem");
-    return;
-  }
+const typeText = (dialogues, onComplete) => {
+  let dialogueIndex = 0;
+  let charIndex = 0;
 
-  const currentDialogue = dialogues[dialogueIndex];
-  const textBox =
-    currentDialogue.speaker === "Knight" ? knightTextBox : necromancerTextBox;
+  const type = () => {
+    if (dialogueIndex >= dialogues.length) {
+      if (onComplete) onComplete(); // Call the callback when dialogue ends
+      return;
+    }
 
-  if (charIndex === 0) {
-    textBox.textContent = "";
-  }
+    const currentDialogue = dialogues[dialogueIndex];
+    const textBox =
+      currentDialogue.speaker === "Knight" ? knightTxt : necromancerTxt;
 
-  if (textBox.scrollHeight > textBox.clientHeight) {
-    const lastSpaceIndex = textBox.textContent.lastIndexOf(" ");
-    if (lastSpaceIndex !== -1) {
-      const remainingText = textBox.textContent.slice(lastSpaceIndex + 1);
-      textBox.textContent = remainingText;
-    } else {
+    if (charIndex === 0) {
       textBox.textContent = "";
     }
-  }
 
-  if (charIndex < currentDialogue.text.length) {
-    textBox.textContent += currentDialogue.text.charAt(charIndex);
-    charIndex++;
-    setTimeout(typeText, typingSpeed);
-  } else {
-    isTyping = false;
-    dialogueIndex++;
-    charIndex = 0;
-
-    if (dialogueIndex < dialogues.length) {
-      setTimeout(startNextDialogue, 1000);
+    if (textBox.scrollHeight > textBox.clientHeight) {
+      const lastSpaceIndex = textBox.textContent.lastIndexOf(" ");
+      if (lastSpaceIndex !== -1) {
+        const remainingText = textBox.textContent.slice(lastSpaceIndex + 1);
+        textBox.textContent = remainingText;
+      } else {
+        textBox.textContent = "";
+      }
     }
-  }
-};
 
-const startNextDialogue = () => {
-  if (!isTyping) {
-    isTyping = true;
-    typeText();
-  }
+    if (charIndex < currentDialogue.text.length) {
+      textBox.textContent += currentDialogue.text.charAt(charIndex);
+      charIndex++;
+      setTimeout(type, typingSpeed);
+    } else {
+      dialogueIndex++;
+      charIndex = 0;
+
+      if (dialogueIndex < dialogues.length) {
+        setTimeout(type, 1000); // Pause before starting the next dialogue
+      } else {
+        if (onComplete) onComplete(); // Call the callback when dialogue ends
+      }
+    }
+  };
+
+  type(); // Start typing
 };
 
 const rock = "rock";
@@ -139,9 +141,18 @@ const getComputerChoice = () => {
   else if (computerChoice === 3) return scissors;
 };
 
+const tieDialogue = [{ speaker: "Knight", text: "Ha. We are Twins!!" }];
+
 const playRound = (humanSelection, computerSelection) => {
   if (computerSelection === humanSelection) {
-    console.log("Tie");
+    console.log("Tie")
+    knightTextBox.classList.remove("hideItem");
+    typeText(tieDialogue, () => {
+      setTimeout(() => {
+        knightTextBox.classList.add("hideItem");
+      }, 1000);
+;
+    });
   } else if (computerSelection === paper && humanSelection === rock) {
     console.log("Paper beats rock. Computer wins round");
     computerScore++;
