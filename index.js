@@ -64,7 +64,7 @@ const dialogues = [
 ];
 
 const knightTxt = document.querySelector(".knight-text p");
-const necromancerTxt = document.querySelector(".necromancer-text p");
+// const necromancerTxt = document.querySelector(".necromancer-text p");
 
 let dialogueIndex = 0;
 let charIndex = 0;
@@ -80,9 +80,13 @@ const typeText = (dialogues, onComplete) => {
       return;
     }
 
+    let textBox = "";
     const currentDialogue = dialogues[dialogueIndex];
-    const textBox =
-      currentDialogue.speaker === "Knight" ? knightTxt : necromancerTxt;
+    if (currentDialogue.speaker === "Knight") textBox = knightTxt;
+    else
+      textBox = document.querySelector(
+        `.${currentDialogue.speaker.toLowerCase()}-text p`
+      );
 
     if (charIndex === 0) {
       textBox.textContent = "";
@@ -145,13 +149,12 @@ const tieDialogue = [{ speaker: "Knight", text: "Ha. We are Twins!!" }];
 
 const playRound = (humanSelection, computerSelection) => {
   if (computerSelection === humanSelection) {
-    console.log("Tie")
+    console.log("Tie");
     knightTextBox.classList.remove("hideItem");
     typeText(tieDialogue, () => {
       setTimeout(() => {
         knightTextBox.classList.add("hideItem");
       }, 1000);
-;
     });
   } else if (computerSelection === paper && humanSelection === rock) {
     console.log("Paper beats rock. Computer wins round");
