@@ -212,7 +212,7 @@ body {
   justify-content: center;
   align-items: center;
   position: absolute;
-  z-index: 3;
+  z-index: 1;
 }
 .attacks {
  display: flex;
@@ -221,6 +221,7 @@ body {
  gap: 3rem; 
  height: 10rem;
  width: 15em;
+ border: 30px solid;
  border-image: url(/images/borderText.png) 15 fill;
 }
 .attacks div {
