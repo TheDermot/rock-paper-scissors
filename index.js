@@ -309,33 +309,36 @@ const endGame = (winner) => {
     console.log(endingKnightDialogue);
     knightTextBox.classList.remove("hideItem");
     typeText(endingKnightDialogue, () => {
-      console.log("knioght");
+      console.log("knight");
     });
   }
 };
 
 const winsNeeded = 1;
 
-const handleAttackClick = (event) => {
+const handleAttackClick = (enemy, event) => {
+  console.log(enemy);
   const humanChoice = handleAttackChoice(event);
   const computerChoice = getComputerChoice();
   if (computerScore < winsNeeded && humanScore < winsNeeded) {
-    playRound(humanChoice, computerChoice, "Necromancer"); // Pass the enemy here
-    console.log(`Human: ${humanScore} , Computer: ${computerScore}`);
+    playRound(humanChoice, computerChoice, enemy);
+    console.log(`Knight: ${humanScore} , ${enemy}: ${computerScore}`);
   }
 };
 
-const playGame = (winsNeeded) => {
-  attacks.forEach((attack) => {
-    attack.addEventListener("click", handleAttackClick);
-  });
-};
+const enemies = ["Necromancer"]; //hold enemy names
+let enemyNum = -1;
 
 startButton.addEventListener("click", () => {
+  enemyNum++;
+
   console.log("START");
   startButton.classList.add("hideItem");
+  console.log(enemies, enemies[enemyNum]);
   attacks.forEach((attack) => {
     attack.classList.remove("hideItem");
+    attack.addEventListener("click", (event) => {
+      handleAttackClick(enemies[enemyNum], event);
+    });
   });
-  playGame(winsNeeded);
 });
