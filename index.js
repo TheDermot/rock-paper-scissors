@@ -178,6 +178,33 @@ const loseDialogues = {
 const playRound = (humanSelection, computerSelection, enemy) => {
   // Dynamically reference the enemy's text box
   const enemyTextBox = document.querySelector(`.${enemy.toLowerCase()}-text`);
+  const enemyTxt = document.querySelector(`.${enemy.toLowerCase()}-text p`);
+
+  //hide attack items, have it say ROCK PAPER SCISSORS SHOOT
+  disableAttacks();
+  setTimeout(() => {
+    attackBox.textContent = "ROCK";
+    setTimeout(() => {
+      attackBox.textContent = "PAPER";
+      setTimeout(() => {
+        attackBox.textContent = "SCISSORS";
+        setTimeout(() => {
+          attackBox.textContent = "SHOOT";
+        }, 1000);
+      }, 1000);
+    }, 1000);
+  }, 1000);
+
+  //hide attack box
+  attackBox.classList.add("hideItem");
+  //show selection
+  knightTextBox.classList.remove("hideItem");
+  enemyTextBox.classList.remove("hideItem");
+  knightTxt.textContent = humanSelection;
+  enemyTxt.textContent = computerSelection;
+
+  return;
+  //dialogue
 
   if (computerSelection === humanSelection) {
     console.log("Tie");
