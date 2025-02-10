@@ -73,22 +73,15 @@ let typingSpeed = 90;
 const typeText = (dialogues, onComplete) => {
   let dialogueIndex = 0;
   let charIndex = 0;
-  
+
   const speakers = new Set();
   dialogues.forEach((dialogue) => {
-    speakers.add(dialogue.speaker);
+    speakers.add(dialogue.speaker.toLowerCase());
   });
 
   console.log(speakers);
 
   const type = () => {
-    if (dialogueIndex >= dialogues.length) {
-      knightTextBox.classList.add("hideItem");
-
-      if (onComplete) onComplete(); // Call the callback when dialogue ends
-      return;
-    }
-
     let textBox = "";
     const currentDialogue = dialogues[dialogueIndex];
     if (currentDialogue.speaker === "Knight") textBox = knightTxt;
@@ -122,6 +115,13 @@ const typeText = (dialogues, onComplete) => {
       if (dialogueIndex < dialogues.length) {
         setTimeout(type, 1000); // Pause before starting the next dialogue
       } else {
+        console.log("ccccc");
+        speakers.forEach((speaker) => {
+          let removeTextBox = document.querySelector(`.${speaker}-text`);
+          setTimeout(() => {
+            removeTextBox.classList.add("hideItem");
+          }, 1000);
+        });
         if (onComplete) onComplete(); // Call the callback when dialogue ends
       }
     }
@@ -184,7 +184,6 @@ const playRound = (humanSelection, computerSelection, enemy) => {
     typeText(tieDialogues.Knight, () => {
       // Use Knight's tie dialogue
       setTimeout(() => {
-        knightTextBox.classList.add("hideItem");
         enableAttacks();
       }, 1000);
     });
@@ -196,7 +195,6 @@ const playRound = (humanSelection, computerSelection, enemy) => {
     typeText(winDialogues[enemy], () => {
       // Use enemy's lose dialogue
       setTimeout(() => {
-        enemyTextBox.classList.add("hideItem");
         enableAttacks();
       }, 1000);
     });
@@ -209,7 +207,6 @@ const playRound = (humanSelection, computerSelection, enemy) => {
     typeText(winDialogues.Knight, () => {
       // Use Knight's win dialogue
       setTimeout(() => {
-        knightTextBox.classList.add("hideItem");
         enableAttacks();
       }, 1000);
     });
@@ -222,7 +219,6 @@ const playRound = (humanSelection, computerSelection, enemy) => {
     typeText(winDialogues[enemy], () => {
       // Use enemy's lose dialogue
       setTimeout(() => {
-        enemyTextBox.classList.add("hideItem");
         enableAttacks();
       }, 1000);
     });
@@ -235,7 +231,6 @@ const playRound = (humanSelection, computerSelection, enemy) => {
     typeText(winDialogues.Knight, () => {
       // Use Knight's win dialogue
       setTimeout(() => {
-        knightTextBox.classList.add("hideItem");
         enableAttacks();
       }, 1000);
     });
@@ -248,7 +243,6 @@ const playRound = (humanSelection, computerSelection, enemy) => {
     typeText(winDialogues.Knight, () => {
       // Use Knight's win dialogue
       setTimeout(() => {
-        knightTextBox.classList.add("hideItem");
         enableAttacks();
       }, 1000);
     });
@@ -261,7 +255,6 @@ const playRound = (humanSelection, computerSelection, enemy) => {
     typeText(winDialogues[enemy], () => {
       // Use enemy's lose dialogue
       setTimeout(() => {
-        enemyTextBox.classList.add("hideItem");
         enableAttacks();
       }, 1000);
     });
