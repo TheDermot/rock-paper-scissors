@@ -73,11 +73,18 @@ let typingSpeed = 90;
 const typeText = (dialogues, onComplete) => {
   let dialogueIndex = 0;
   let charIndex = 0;
+  
+  const speakers = new Set();
+  dialogues.forEach((dialogue) => {
+    speakers.add(dialogue.speaker);
+  });
+
+  console.log(speakers);
 
   const type = () => {
     if (dialogueIndex >= dialogues.length) {
       knightTextBox.classList.add("hideItem");
-      
+
       if (onComplete) onComplete(); // Call the callback when dialogue ends
       return;
     }
