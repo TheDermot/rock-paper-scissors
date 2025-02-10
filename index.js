@@ -76,6 +76,8 @@ const typeText = (dialogues, onComplete) => {
 
   const type = () => {
     if (dialogueIndex >= dialogues.length) {
+      knightTextBox.classList.add("hideItem");
+      
       if (onComplete) onComplete(); // Call the callback when dialogue ends
       return;
     }
@@ -170,76 +172,90 @@ const playRound = (humanSelection, computerSelection, enemy) => {
 
   if (computerSelection === humanSelection) {
     console.log("Tie");
+    disableAttacks();
     knightTextBox.classList.remove("hideItem"); // Show Knight's text box for tie
     typeText(tieDialogues.Knight, () => {
       // Use Knight's tie dialogue
       setTimeout(() => {
         knightTextBox.classList.add("hideItem");
+        enableAttacks();
       }, 1000);
     });
   } else if (computerSelection === paper && humanSelection === rock) {
     console.log("Paper beats rock. Computer wins round");
+    disableAttacks();
     computerScore++;
     enemyTextBox.classList.remove("hideItem"); // Show enemy's text box
     typeText(winDialogues[enemy], () => {
       // Use enemy's lose dialogue
       setTimeout(() => {
         enemyTextBox.classList.add("hideItem");
+        enableAttacks();
       }, 1000);
     });
     checkWinner(humanScore, computerScore);
   } else if (computerSelection === paper && humanSelection === scissors) {
     console.log("Scissors beats paper. Human wins round");
+    disableAttacks();
     humanScore++;
     knightTextBox.classList.remove("hideItem"); // Show Knight's text box
     typeText(winDialogues.Knight, () => {
       // Use Knight's win dialogue
       setTimeout(() => {
         knightTextBox.classList.add("hideItem");
+        enableAttacks();
       }, 1000);
     });
     checkWinner(humanScore, computerScore);
   } else if (computerSelection === rock && humanSelection === scissors) {
     console.log("Rock beats scissors. Computer wins round");
+    disableAttacks();
     computerScore++;
     enemyTextBox.classList.remove("hideItem"); // Show enemy's text box
     typeText(winDialogues[enemy], () => {
       // Use enemy's lose dialogue
       setTimeout(() => {
         enemyTextBox.classList.add("hideItem");
+        enableAttacks();
       }, 1000);
     });
     checkWinner(humanScore, computerScore);
   } else if (computerSelection === rock && humanSelection === paper) {
     console.log("Paper beats rock. Human wins round");
+    disableAttacks();
     humanScore++;
     knightTextBox.classList.remove("hideItem"); // Show Knight's text box
     typeText(winDialogues.Knight, () => {
       // Use Knight's win dialogue
       setTimeout(() => {
         knightTextBox.classList.add("hideItem");
+        enableAttacks();
       }, 1000);
     });
     checkWinner(humanScore, computerScore);
   } else if (computerSelection === scissors && humanSelection === rock) {
     console.log("Rock beats scissors. Human wins round");
+    disableAttacks();
     humanScore++;
     knightTextBox.classList.remove("hideItem"); // Show Knight's text box
     typeText(winDialogues.Knight, () => {
       // Use Knight's win dialogue
       setTimeout(() => {
         knightTextBox.classList.add("hideItem");
+        enableAttacks();
       }, 1000);
     });
     checkWinner(humanScore, computerScore);
   } else if (computerSelection === scissors && humanSelection === paper) {
     console.log("Scissors beats paper. Computer wins round");
+    disableAttacks();
     computerScore++;
     enemyTextBox.classList.remove("hideItem"); // Show enemy's text box
     typeText(winDialogues[enemy], () => {
       // Use enemy's lose dialogue
       setTimeout(() => {
         enemyTextBox.classList.add("hideItem");
+        enableAttacks();
       }, 1000);
     });
     checkWinner(humanScore, computerScore);
@@ -256,9 +272,29 @@ const checkWinner = (humanScore, computerScore) => {
   } else return;
 };
 
-const endGame = () => {
+const disableAttacks = () => {
   attacks.forEach((attack) => {
     attack.removeEventListener("click", handleAttackClick);
+    attack.classList.add("hideItem");
+  });
+};
+const enableAttacks = () => {
+  attacks.forEach((attack) => {
+    attack.addEventListener("click", handleAttackClick);
+    attack.classList.remove("hideItem");
+  });
+};
+
+const endingDialogue = [
+  { speaker: "Knight", text: "AHHHH you are deeeeeeead socuk" },
+];
+
+const endGame = () => {
+  disableAttacks();
+  attackBox.classList.add("hideItem");
+  console.log(endingDialogue);
+  typeText(endingDialogue, () => {
+    console.log("eh");
   });
 };
 
@@ -270,8 +306,6 @@ const handleAttackClick = (event) => {
   if (computerScore < winsNeeded && humanScore < winsNeeded) {
     playRound(humanChoice, computerChoice, "Necromancer"); // Pass the enemy here
     console.log(`Human: ${humanScore} , Computer: ${computerScore}`);
-  } else {
-    endGame();
   }
 };
 
