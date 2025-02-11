@@ -175,15 +175,22 @@ const loseDialogues = {
 const animateCountdown = () => {
   return new Promise((resolve) => {
     disableAttacks();
+    let countdownDiv = document.createElement("div");
+    attackBox.append(countdownDiv);
     setTimeout(() => {
-      attackBox.textContent = "ROCK";
+      countdownDiv.textContent = "ROCK";
       setTimeout(() => {
-        attackBox.textContent = "PAPER";
+        countdownDiv.textContent = "PAPER";
         setTimeout(() => {
-          attackBox.textContent = "SCISSORS";
+          countdownDiv.textContent = "SCISSORS";
           setTimeout(() => {
-            attackBox.textContent = "SHOOT";
-            resolve(); // Resolve the promise after the countdown
+            countdownDiv.textContent = "SHOOT";
+            setTimeout(() => {
+              countdownDiv.textContent = "";
+              countdownDiv.remove();
+              attackBox.classList.add("hideItem");
+              resolve(); // Resolve the promise after the countdown
+            }, 1000);
           }, 1000);
         }, 1000);
       }, 1000);
@@ -213,7 +220,7 @@ const displayAttackIcons = (humanSelection, computerSelection, enemy) => {
       knightAttackIcon.remove();
       computerAttackIcon.remove();
       resolve(); // Resolve the promise after icons are removed
-    }, 2000);
+    }, 3000);
   });
 };
 
@@ -235,8 +242,9 @@ const playRound = async (humanSelection, computerSelection, enemy) => {
     knightTextBox.classList.remove("hideItem"); // Show Knight's text box for tie
     typeText(tieDialogues.Knight, () => {
       // Use Knight's tie dialogue
+
       setTimeout(() => {
-        enableAttacks();
+        checkWinner(humanScore, computerScore, enemy);
       }, 1000);
     });
   } else if (computerSelection === paper && humanSelection === rock) {
@@ -247,7 +255,8 @@ const playRound = async (humanSelection, computerSelection, enemy) => {
     typeText(winDialogues[enemy], () => {
       // Use enemy's lose dialogue
       setTimeout(() => {
-        enableAttacks();
+        attackBox.classList.remove("hideItem");
+
         checkWinner(humanScore, computerScore, enemy);
       }, 1000);
     });
@@ -259,7 +268,6 @@ const playRound = async (humanSelection, computerSelection, enemy) => {
     typeText(winDialogues.Knight, () => {
       // Use Knight's win dialogue
       setTimeout(() => {
-        enableAttacks();
         checkWinner(humanScore, computerScore, enemy);
       }, 1000);
     });
@@ -271,7 +279,6 @@ const playRound = async (humanSelection, computerSelection, enemy) => {
     typeText(winDialogues[enemy], () => {
       // Use enemy's lose dialogue
       setTimeout(() => {
-        enableAttacks();
         checkWinner(humanScore, computerScore, enemy);
       }, 1000);
     });
@@ -283,7 +290,6 @@ const playRound = async (humanSelection, computerSelection, enemy) => {
     typeText(winDialogues.Knight, () => {
       // Use Knight's win dialogue
       setTimeout(() => {
-        enableAttacks();
         checkWinner(humanScore, computerScore, enemy);
       }, 1000);
     });
@@ -295,7 +301,6 @@ const playRound = async (humanSelection, computerSelection, enemy) => {
     typeText(winDialogues.Knight, () => {
       // Use Knight's win dialogue
       setTimeout(() => {
-        enableAttacks();
         checkWinner(humanScore, computerScore, enemy);
       }, 1000);
     });
@@ -307,7 +312,6 @@ const playRound = async (humanSelection, computerSelection, enemy) => {
     typeText(winDialogues[enemy], () => {
       // Use enemy's lose dialogue
       setTimeout(() => {
-        enableAttacks();
         checkWinner(humanScore, computerScore, enemy);
       }, 1000);
     });
@@ -323,7 +327,11 @@ const checkWinner = (humanScore, computerScore, enemy) => {
     console.log(`Winner: Knight. Score: ${humanScore}`);
     let winner = "knight";
     endGame(winner);
-  } else return;
+  } else {
+    attackBox.classList.remove("hideItem");
+    enableAttacks();
+    return;
+  }
 };
 
 const disableAttacks = () => {
