@@ -227,6 +227,14 @@ const displayAttackIcons = (humanSelection, computerSelection, enemy) => {
   });
 };
 
+const updateScoreDisplay = () => {
+  const knightScoreDisplay = document.querySelector(".knight-score");
+  const enemyScoreDisplay = document.querySelector(".enemy-score");
+
+  knightScoreDisplay.textContent = `${humanScore}`;
+  enemyScoreDisplay.textContent = `${computerScore}`;
+};
+
 const playRound = async (humanSelection, computerSelection, enemy) => {
   // Dynamically reference the enemy's text box
   const enemyTextBox = document.querySelector(`.${enemy.toLowerCase()}-text`);
@@ -254,6 +262,7 @@ const playRound = async (humanSelection, computerSelection, enemy) => {
     console.log("Paper beats rock. Computer wins round");
     disableAttacks();
     computerScore++;
+    updateScoreDisplay();
     enemyTextBox.classList.remove("hideItem"); // Show enemy's text box
     typeText(winDialogues[enemy], () => {
       // Use enemy's lose dialogue
@@ -267,6 +276,7 @@ const playRound = async (humanSelection, computerSelection, enemy) => {
     console.log("Scissors beats paper. Human wins round");
     disableAttacks();
     humanScore++;
+    updateScoreDisplay();
     knightTextBox.classList.remove("hideItem"); // Show Knight's text box
     typeText(winDialogues.Knight, () => {
       // Use Knight's win dialogue
@@ -278,6 +288,7 @@ const playRound = async (humanSelection, computerSelection, enemy) => {
     console.log("Rock beats scissors. Computer wins round");
     disableAttacks();
     computerScore++;
+    updateScoreDisplay();
     enemyTextBox.classList.remove("hideItem"); // Show enemy's text box
     typeText(winDialogues[enemy], () => {
       // Use enemy's lose dialogue
@@ -289,6 +300,7 @@ const playRound = async (humanSelection, computerSelection, enemy) => {
     console.log("Paper beats rock. Human wins round");
     disableAttacks();
     humanScore++;
+    updateScoreDisplay();
     knightTextBox.classList.remove("hideItem"); // Show Knight's text box
     typeText(winDialogues.Knight, () => {
       // Use Knight's win dialogue
@@ -300,6 +312,7 @@ const playRound = async (humanSelection, computerSelection, enemy) => {
     console.log("Rock beats scissors. Human wins round");
     disableAttacks();
     humanScore++;
+    updateScoreDisplay();
     knightTextBox.classList.remove("hideItem"); // Show Knight's text box
     typeText(winDialogues.Knight, () => {
       // Use Knight's win dialogue
@@ -311,6 +324,7 @@ const playRound = async (humanSelection, computerSelection, enemy) => {
     console.log("Scissors beats paper. Computer wins round");
     disableAttacks();
     computerScore++;
+    updateScoreDisplay();
     enemyTextBox.classList.remove("hideItem"); // Show enemy's text box
     typeText(winDialogues[enemy], () => {
       // Use enemy's lose dialogue
