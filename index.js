@@ -197,12 +197,17 @@ const playRound = (humanSelection, computerSelection, enemy) => {
 
   //hide attack box
   attackBox.classList.add("hideItem");
-  //show selection
-  knightTextBox.classList.remove("hideItem");
-  enemyTextBox.classList.remove("hideItem");
-  knightTxt.textContent = humanSelection;
-  enemyTxt.textContent = computerSelection;
+  //show selection made with icons
 
+  console.log(humanSelection, computerSelection);
+  const knightAttackIcon = document.createElement("div");
+  const computerAttackIcon = document.createElement("div");
+
+  knightAttackIcon.classList.add(`${humanSelection}-attack`, `knight-attack-position`);
+  knightTextBox.insertAdjacentElement("afterend", knightAttackIcon);
+
+  computerAttackIcon.classList.add(`${computerSelection}-attack`, `${enemy.toLowerCase()}-attack-position`);
+  enemyTextBox.insertAdjacentElement("afterend", computerAttackIcon);
   return;
   //dialogue
 

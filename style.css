@@ -187,7 +187,8 @@ body {
   height: max(1.6rem);
   overflow: hidden;
 }
-.knight-text {
+.knight-text,
+.knight-attack-position {
   bottom: 1.5em;
   left: 1.35em;
 }
@@ -203,6 +204,10 @@ body {
   bottom: 1.6em;
   left: 0.9em;
 }
+.necromancer-attack-position {
+  bottom: 1.6em;
+  left: 2.7em;
+}
 
 .choose-attack {
   border: 1px red solid;
@@ -215,23 +220,23 @@ body {
   z-index: 1;
 }
 .attacks {
- display: flex;
- justify-content: center;
- align-items: center;
- gap: 3rem; 
- height: 10rem;
- width: 15em;
- border: 30px solid;
- border-image: url(/images/borderText.png) 15 fill;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  height: 10rem;
+  width: 15em;
+  border: 30px solid;
+  border-image: url(/images/borderText.png) 15 fill;
 }
-.attacks button{
+.attacks button {
   border: none;
   padding: 0;
   background: none;
   font: 3em "Pixelify Sans";
   color: rgb(191, 173, 173);
 }
-.attacks button:hover{
+.attacks button:hover {
   font-size: 3.5em;
   cursor: pointer;
 }
@@ -245,17 +250,27 @@ body {
   cursor: pointer;
   transform: scale(3.5);
 }
-.paper {
+.paper,
+.paper-attack {
   background: url(./images/paper.png) no-repeat;
   animation: paperBob 1s steps(6) infinite;
 }
-.rock {
+.rock,
+.rock-attack {
   background: url(./images/rock.png) no-repeat;
   animation: rockBob 1s steps(6) infinite;
 }
-.scissors {
+.scissors,
+.scissors-attack {
   background: url(./images/scissors.png) no-repeat;
   animation: rockBob 1s steps(6) infinite;
+}
+.paper-attack,
+.rock-attack,
+.scissors-attack {
+  width: 21px;
+  height: 21px;
+  position: relative;
 }
 
 @keyframes paperBob {
