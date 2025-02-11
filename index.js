@@ -203,11 +203,21 @@ const playRound = (humanSelection, computerSelection, enemy) => {
   const knightAttackIcon = document.createElement("div");
   const computerAttackIcon = document.createElement("div");
 
-  knightAttackIcon.classList.add(`${humanSelection}-attack`, `knight-attack-position`);
+  knightAttackIcon.classList.add(
+    `${humanSelection}-attack`,
+    `knight-attack-position`
+  );
   knightTextBox.insertAdjacentElement("afterend", knightAttackIcon);
 
-  computerAttackIcon.classList.add(`${computerSelection}-attack`, `${enemy.toLowerCase()}-attack-position`);
+  computerAttackIcon.classList.add(
+    `${computerSelection}-attack`,
+    `${enemy.toLowerCase()}-attack-position`
+  );
   enemyTextBox.insertAdjacentElement("afterend", computerAttackIcon);
+  setTimeout(() => {
+    knightAttackIcon.remove();
+    computerAttackIcon.remove();
+  }, 2000);
   return;
   //dialogue
 
