@@ -58,9 +58,6 @@ const dialogues = [
   //   text: "SSss, you intrique me human. Fine, I'll agree to these terms. Your death will be memorable",
   // },
   // { speaker: "Knight", text: "Ha, I'm sure it will be. Ok." },
-  // { speaker: "Knight", text: "Rock" },
-  // { speaker: "Knight", text: "Paper" },
-  // { speaker: "Knight", text: "Scissors!" },
 ];
 
 const knightTxt = document.querySelector(".knight-text p");
@@ -175,12 +172,7 @@ const loseDialogues = {
   // Add more enemies here
 };
 
-const playRound = (humanSelection, computerSelection, enemy) => {
-  // Dynamically reference the enemy's text box
-  const enemyTextBox = document.querySelector(`.${enemy.toLowerCase()}-text`);
-  const enemyTxt = document.querySelector(`.${enemy.toLowerCase()}-text p`);
-
-  //hide attack items, have it say ROCK PAPER SCISSORS SHOOT
+const animateCountdown = () => {
   disableAttacks();
   setTimeout(() => {
     attackBox.textContent = "ROCK";
@@ -194,12 +186,10 @@ const playRound = (humanSelection, computerSelection, enemy) => {
       }, 1000);
     }, 1000);
   }, 1000);
+};
 
-  //hide attack box
-  attackBox.classList.add("hideItem");
-  //show selection made with icons
-
-  console.log(humanSelection, computerSelection);
+const displayAttackIcons = (humanSelection, computerSelection, enemy) => {
+  const enemyTextBox = document.querySelector(`.${enemy.toLowerCase()}-text`);
   const knightAttackIcon = document.createElement("div");
   const computerAttackIcon = document.createElement("div");
 
@@ -214,11 +204,24 @@ const playRound = (humanSelection, computerSelection, enemy) => {
     `${enemy.toLowerCase()}-attack-position`
   );
   enemyTextBox.insertAdjacentElement("afterend", computerAttackIcon);
+
   setTimeout(() => {
     knightAttackIcon.remove();
     computerAttackIcon.remove();
   }, 2000);
-  return;
+};
+
+const playRound = (humanSelection, computerSelection, enemy) => {
+  // Dynamically reference the enemy's text box
+  const enemyTextBox = document.querySelector(`.${enemy.toLowerCase()}-text`);
+  // const enemyTxt = document.querySelector(`.${enemy.toLowerCase()}-text p`);
+
+  //hide attack items, have it say ROCK PAPER SCISSORS SHOOT
+  animateCountdown();
+
+  //hide attack box
+  attackBox.classList.add("hideItem");
+  displayAttackIcons(humanSelection, computerSelection, enemy);
   //dialogue
 
   if (computerSelection === humanSelection) {
@@ -356,7 +359,7 @@ const endGame = (winner) => {
   }
 };
 
-const winsNeeded = 1;
+const winsNeeded = 3;
 
 const handleAttackClick = (enemy, event) => {
   console.log(enemy);
