@@ -198,7 +198,7 @@ body {
   font-size: 10px;
   font-size: 6px;
   white-space: pre-wrap;
-  word-wrap: break-word; 
+  word-wrap: break-word;
 }
 .necromancer-text {
   bottom: 1.6em;
@@ -219,6 +219,7 @@ body {
   position: absolute;
   z-index: 1;
 }
+
 .attacks {
   display: flex;
   justify-content: center;
@@ -249,6 +250,12 @@ body {
 .attacks div:hover {
   cursor: pointer;
   transform: scale(3.5);
+}
+div .display-countdown {
+  width: fit-content;
+  font: small "Pixelify Sans";
+  padding-top: 0.2em;
+  color: rgb(191, 173, 173);
 }
 .paper,
 .paper-attack {

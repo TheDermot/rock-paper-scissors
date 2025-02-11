@@ -172,10 +172,13 @@ const loseDialogues = {
   // Add more enemies here
 };
 
+//could make it a promise and do a loop with setTimeout
+
 const animateCountdown = () => {
   return new Promise((resolve) => {
     disableAttacks();
     let countdownDiv = document.createElement("div");
+    countdownDiv.classList.add("display-countdown");
     attackBox.append(countdownDiv);
     setTimeout(() => {
       countdownDiv.textContent = "ROCK";
