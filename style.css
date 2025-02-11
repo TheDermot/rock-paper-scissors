@@ -310,12 +310,10 @@ div .display-countdown {
   height: 35%;
   display: flex;
   align-items: center;
-  border: 1px green solid;
   color: rgb(182, 83, 83);
   font: 4em "Pixelify Sans";
 }
 .scoreboard span {
-  border: 1px yellow solid;
   width: 100%;
   text-align: center;
 }

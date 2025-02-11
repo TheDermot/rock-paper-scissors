@@ -227,10 +227,10 @@ const displayAttackIcons = (humanSelection, computerSelection, enemy) => {
   });
 };
 
-const updateScoreDisplay = () => {
-  const knightScoreDisplay = document.querySelector(".knight-score");
-  const enemyScoreDisplay = document.querySelector(".enemy-score");
+const knightScoreDisplay = document.querySelector(".knight-score");
+const enemyScoreDisplay = document.querySelector(".enemy-score");
 
+const updateScoreDisplay = () => {
   knightScoreDisplay.textContent = `${humanScore}`;
   enemyScoreDisplay.textContent = `${computerScore}`;
 };
@@ -374,6 +374,10 @@ const endingNecromancerDialogue = [
 const endGame = (winner) => {
   disableAttacks();
   attackBox.classList.add("hideItem");
+  knightScoreDisplay.classList.add("hideItem");
+  knightScoreDisplay.textContent = "0";
+  enemyScoreDisplay.classList.add("hideItem");
+  enemyScoreDisplay.textContent = "0";
   if (winner === "necromancer") {
     necromancerTextBox.classList.remove("hideItem");
     console.log(endingNecromancerDialogue);
@@ -409,6 +413,8 @@ startButton.addEventListener("click", () => {
 
   console.log("START");
   startButton.classList.add("hideItem");
+  knightScoreDisplay.classList.remove("hideItem");
+  enemyScoreDisplay.classList.remove("hideItem");
   console.log(enemies, enemies[enemyNum]);
   attacks.forEach((attack) => {
     attack.classList.remove("hideItem");
