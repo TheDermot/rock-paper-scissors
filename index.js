@@ -173,55 +173,60 @@ const loseDialogues = {
 };
 
 const animateCountdown = () => {
-  disableAttacks();
-  setTimeout(() => {
-    attackBox.textContent = "ROCK";
+  return new Promise((resolve) => {
+    disableAttacks();
     setTimeout(() => {
-      attackBox.textContent = "PAPER";
+      attackBox.textContent = "ROCK";
       setTimeout(() => {
-        attackBox.textContent = "SCISSORS";
+        attackBox.textContent = "PAPER";
         setTimeout(() => {
-          attackBox.textContent = "SHOOT";
+          attackBox.textContent = "SCISSORS";
+          setTimeout(() => {
+            attackBox.textContent = "SHOOT";
+            resolve(); // Resolve the promise after the countdown
+          }, 1000);
         }, 1000);
       }, 1000);
-    }, 1000);
-  }, 1000);
+    });
+  });
 };
 
 const displayAttackIcons = (humanSelection, computerSelection, enemy) => {
-  const enemyTextBox = document.querySelector(`.${enemy.toLowerCase()}-text`);
-  const knightAttackIcon = document.createElement("div");
-  const computerAttackIcon = document.createElement("div");
+  return new Promise((resolve) => {
+    const enemyTextBox = document.querySelector(`.${enemy.toLowerCase()}-text`);
+    const knightAttackIcon = document.createElement("div");
+    const computerAttackIcon = document.createElement("div");
 
-  knightAttackIcon.classList.add(
-    `${humanSelection}-attack`,
-    `knight-attack-position`
-  );
-  knightTextBox.insertAdjacentElement("afterend", knightAttackIcon);
+    knightAttackIcon.classList.add(
+      `${humanSelection}-attack`,
+      `knight-attack-position`
+    );
+    knightTextBox.insertAdjacentElement("afterend", knightAttackIcon);
 
-  computerAttackIcon.classList.add(
-    `${computerSelection}-attack`,
-    `${enemy.toLowerCase()}-attack-position`
-  );
-  enemyTextBox.insertAdjacentElement("afterend", computerAttackIcon);
+    computerAttackIcon.classList.add(
+      `${computerSelection}-attack`,
+      `${enemy.toLowerCase()}-attack-position`
+    );
+    enemyTextBox.insertAdjacentElement("afterend", computerAttackIcon);
 
-  setTimeout(() => {
-    knightAttackIcon.remove();
-    computerAttackIcon.remove();
-  }, 2000);
+    setTimeout(() => {
+      knightAttackIcon.remove();
+      computerAttackIcon.remove();
+      resolve(); // Resolve the promise after icons are removed
+    }, 2000);
+  });
 };
 
-const playRound = (humanSelection, computerSelection, enemy) => {
+const playRound = async (humanSelection, computerSelection, enemy) => {
   // Dynamically reference the enemy's text box
   const enemyTextBox = document.querySelector(`.${enemy.toLowerCase()}-text`);
   // const enemyTxt = document.querySelector(`.${enemy.toLowerCase()}-text p`);
 
   //hide attack items, have it say ROCK PAPER SCISSORS SHOOT
-  animateCountdown();
+  await animateCountdown();
 
   //hide attack box
-  attackBox.classList.add("hideItem");
-  displayAttackIcons(humanSelection, computerSelection, enemy);
+  await displayAttackIcons(humanSelection, computerSelection, enemy);
   //dialogue
 
   if (computerSelection === humanSelection) {
