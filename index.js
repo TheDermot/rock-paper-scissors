@@ -19,7 +19,7 @@ const enemyScoreDisplay = document.querySelector(".enemy-score");
 // Game State
 let computerScore = 0;
 let humanScore = 0;
-const winsNeeded = 3;
+const winsNeeded = 1;
 const typingSpeed = 90;
 
 // Game Rules
@@ -78,31 +78,31 @@ window.addEventListener("orientationchange", checkOrientation);
 const introDialogues = [
   { speaker: "Knight", text: "Man, these are some nice trees" },
   { speaker: "Necromancer", text: "Who dare trespasses into my domain?" },
-  { speaker: "Knight", text: "What is a domain?" },
-  {
-    speaker: "Necromancer",
-    text: "Fool! None who enter leave alive. Wield your weapon now",
-  },
-  { speaker: "Knight", text: "Uhh....I don't have one." },
-  { speaker: "Knight", text: "Rock Paper Scissors?" },
-  { speaker: "Necromancer", text: "You dare insult me with childrens games." },
-  {
-    speaker: "Knight",
-    text: "Oh so you're just scared you'd lose to me in a childrens game",
-  },
-  {
-    speaker: "Necromancer",
-    text: "Silence, I was the master of Rock Paper Scissors in necromancy school.",
-  },
-  {
-    speaker: "Knight",
-    text: "Ooo, a master. Then we must play. First one to 3 wins. If I win you let me pass and I'll be on my merry way. If I lose, you may kill me",
-  },
-  {
-    speaker: "Necromancer",
-    text: "SSss, you intrique me human. Fine, I'll agree to these terms. Your death will be memorable",
-  },
-  { speaker: "Knight", text: "Ha, I'm sure it will be. Ok." },
+  // { speaker: "Knight", text: "What is a domain?" },
+  // {
+  //   speaker: "Necromancer",
+  //   text: "Fool! None who enter leave alive. Wield your weapon now",
+  // },
+  // { speaker: "Knight", text: "Uhh....I don't have one." },
+  // { speaker: "Knight", text: "Rock Paper Scissors?" },
+  // { speaker: "Necromancer", text: "You dare insult me with childrens games." },
+  // {
+  //   speaker: "Knight",
+  //   text: "Oh so you're just scared you'd lose to me in a childrens game",
+  // },
+  // {
+  //   speaker: "Necromancer",
+  //   text: "Silence, I was the master of Rock Paper Scissors in necromancy school.",
+  // },
+  // {
+  //   speaker: "Knight",
+  //   text: "Ooo, a master. Then we must play. First one to 3 wins. If I win you let me pass and I'll be on my merry way. If I lose, you may kill me",
+  // },
+  // {
+  //   speaker: "Necromancer",
+  //   text: "SSss, you intrique me human. Fine, I'll agree to these terms. Your death will be memorable",
+  // },
+  // { speaker: "Knight", text: "Ha, I'm sure it will be. Ok." },
 ];
 
 // Tie, Win, and Lose Dialogues
@@ -124,30 +124,32 @@ const loseDialogues = {
 // Ending Dialogues
 const endingKnightDialogue = [
   { speaker: "Knight", text: "Ha I win. You lost, your domain is mine now" },
+  // {
+  //   speaker: "Necromancer",
+  //   text: "What foolishness go now before I curse you",
+  // },
+  // {
+  //   speaker: "Knight",
+  //   text: "I'm not joking. Everyone knows when you lose a game of Rock, Paper, Scissors that you fortfiet your domain",
+  // },
+  // {
+  //   speaker: "Necromancer",
+  //   text: "WHAT! Your sniveling tongue shall now lead to your death",
+  // },
+  // {
+  //   speaker: "Knight",
+  //   text: "Leave now before my domain crushes you",
+  // },
   {
     speaker: "Necromancer",
-    text: "What foolishness go now before I curse you",
-  },
-  {
-    speaker: "Knight",
-    text: "I'm not joking. Everyone knows when you lose a game of Rock, Paper, Scissors that you fortfiet your domain",
-  },
-  {
-    speaker: "Necromancer",
-    text: "WHAT! Your sniveling tongue shall now lead to your death",
-  },
-  {
-    speaker: "Knight",
-    text: "Leave now before my domain crushes you",
-  },
-  {
-    speaker: "Necromancer",
-    text: "Dieeeea",
+    text: "Dieeee",
   },
 ];
 
 const endingKnightDialogueTwo = [
   { speaker: "Knight", text: "That won't work on me" },
+];
+const endingKnightDialogueThree = [
   {
     speaker: "Necromancer",
     text: "No no no What is happening AHHHHhhh",
@@ -216,6 +218,7 @@ const playRound = async (humanSelection, computerSelection, enemy) => {
       knightTextBox.classList.remove("hideItem");
       await typeText(tieDialogues.Knight, () => {
         setTimeout(() => {
+          knightTextBox.classList.add("hideItem");
           checkWinner(humanScore, computerScore, enemy);
         }, 1000);
       });
@@ -229,6 +232,7 @@ const playRound = async (humanSelection, computerSelection, enemy) => {
       knightTextBox.classList.remove("hideItem");
       await typeText(winDialogues.Knight, () => {
         setTimeout(() => {
+          knightTextBox.classList.add("hideItem");
           checkWinner(humanScore, computerScore, enemy);
         }, 1000);
       });
@@ -242,6 +246,7 @@ const playRound = async (humanSelection, computerSelection, enemy) => {
       enemyTextBox.classList.remove("hideItem");
       await typeText(winDialogues[enemy], () => {
         setTimeout(() => {
+          enemyTextBox.classList.add("hideItem");
           checkWinner(humanScore, computerScore, enemy);
         }, 1000);
       });
@@ -271,6 +276,130 @@ const checkWinner = (humanScore, computerScore, enemy) => {
   }
 };
 
+/**
+ * Ends game by hiding all attack ui and initiating ending dialogue and animation
+ * @param {string} winner - Game Winner
+ */
+
+const endGame = (winner) => {
+  disableAttacks();
+  attackBox.classList.add("hideItem");
+  knightScoreDisplay.classList.add("hideItem");
+  knightScoreDisplay.textContent = "0";
+  enemyScoreDisplay.classList.add("hideItem");
+  enemyScoreDisplay.textContent = "0";
+
+  if (winner === "necromancer") {
+    knightTextBox.classList.remove("hideItem");
+    necromancerTextBox.classList.remove("hideItem");
+    typeText(endingNecromancerDialogue, () => {
+      console.log("Necro");
+      setTimeout(() => {
+        necromancer.classList.add("necro-attack");
+        setTimeout(() => {
+          knight.classList.add("knight-hurt");
+          setTimeout(() => {
+            knight.classList.add("knight-die");
+          });
+        }, 1000);
+      }, 1000);
+    });
+  } else {
+    knightTextBox.classList.remove("hideItem");
+    necromancerTextBox.classList.remove("hideItem");
+    typeText(endingKnightDialogue, () => {
+      console.log("knight");
+
+      // Trigger animations after the dialogue
+      setTimeout(() => {
+        // Necromancer attack Knight
+        necromancer.classList.add("necro-attack");
+        knight.classList.add("knight-grow");
+        knightTextBox.remove("hideItem");
+        typeText(endingKnightDialogueTwo, () => {
+          console.log("part 2");
+        });
+        // After, Necromancer gets hurt and dies
+        setTimeout(() => {
+          necromancer.classList.add("necro-hurt");
+          necromancerTextBox.classList.remove("hideItem");
+          typeText(endingKnightDialogueThree, () => {
+            console.log("part 3");
+          });
+          setTimeout(() => {
+            necromancer.classList.add("necro-death");
+          }, 3000);
+        }, 1000);
+      }, 1000); // Delay before starting animations
+    });
+  }
+};
+/**
+ * Disables all attack buttons.
+ */
+const disableAttacks = () => {
+  attacks.forEach((attack) => {
+    attack.removeEventListener("click", handleAttackClick);
+    attack.classList.add("hideItem");
+  });
+};
+
+/**
+ * Enables all attack buttons.
+ */
+const enableAttacks = () => {
+  attacks.forEach((attack) => {
+    attack.addEventListener("click", handleAttackClick);
+    attack.classList.remove("hideItem");
+  });
+};
+/**
+ * Updates score display after each attack
+ */
+const updateScoreDisplay = () => {
+  knightScoreDisplay.textContent = `${humanScore}`;
+  enemyScoreDisplay.textContent = `${computerScore}`;
+};
+/**
+ * Handles the player's attack choice.
+ * @param {string} enemy - The current enemy.
+ * @param {Event} event - The click event.
+ */
+const handleAttackClick = (enemy, event) => {
+  console.log(enemy);
+  const humanChoice = handleAttackChoice(event); // Get the player's choice
+  const computerChoice = getComputerChoice(); // Get the computer's choice
+
+  // Play a round if the game is not over
+  if (computerScore < winsNeeded && humanScore < winsNeeded) {
+    playRound(humanChoice, computerChoice, enemy);
+    console.log(`Knight: ${humanScore} , ${enemy}: ${computerScore}`);
+  }
+};
+
+/**
+ * Gets the player's choice from the clicked attack button.
+ * @param {Event} event - The click event.
+ * @returns {string} - The player's choice ("rock", "paper", or "scissors").
+ */
+const handleAttackChoice = (event) => {
+  const humanChoice = event.target.classList[0]; // Gets "paper", "rock", or "scissors"
+  console.log(`You chose: ${humanChoice}`);
+  return humanChoice; // Return the choice
+};
+
+/**
+ * Generates a random choice for the computer.
+ * @returns {string} - The computer's choice ("rock", "paper", or "scissors").
+ */
+const getComputerChoice = () => {
+  const computerChoice = Math.floor(Math.random() * 3) + 1;
+  console.log(`Computer chose: ${computerChoice}`);
+  if (computerChoice === 1) return "rock";
+  else if (computerChoice === 2) return "paper";
+  else if (computerChoice === 3) return "scissors";
+};
+
 // ======================
 // UI and Animation Logic
 // ======================
@@ -284,6 +413,13 @@ const typeText = (dialogues, onComplete) => {
   let dialogueIndex = 0;
   let charIndex = 0;
 
+  const speakers = new Set();
+  dialogues.forEach((dialogue) => {
+    speakers.add(dialogue.speaker.toLowerCase());
+  });
+
+  console.log(speakers);
+
   const type = () => {
     let textBox = "";
 
@@ -296,12 +432,15 @@ const typeText = (dialogues, onComplete) => {
       textBox = enemyTxt;
     }
 
-    if (charIndex === 0) textBox.textContent = "";
+    if (charIndex === 0) {
+      textBox.textContent = "";
+    }
 
     if (textBox.scrollHeight > textBox.clientHeight) {
       const lastSpaceIndex = textBox.textContent.lastIndexOf(" ");
       if (lastSpaceIndex !== -1) {
-        textBox.textContent = textBox.textContent.slice(lastSpaceIndex + 1);
+        const remainingText = textBox.textContent.slice(lastSpaceIndex + 1);
+        textBox.textContent = remainingText;
       } else {
         textBox.textContent = "";
       }
@@ -316,9 +455,24 @@ const typeText = (dialogues, onComplete) => {
       charIndex = 0;
 
       if (dialogueIndex < dialogues.length) {
-        setTimeout(type, 1000); // Pause before next dialogue
+        console.log(dialogueIndex, dialogues.length);
+        console.log("timeout type");
+        setTimeout(type, 1000); // Pause before starting the next dialogue
       } else {
-        if (onComplete) onComplete();
+        console.log("ccccc");
+        speakers.forEach((speaker) => {
+          let removeTextBox = document.querySelector(`.${speaker}-text`);
+          if (removeTextBox) {
+            setTimeout(() => {
+              removeTextBox.classList.add("hideItem");
+            }, 1000);
+          }
+        });
+        if (onComplete) {
+          knightTxt.textContent = "";
+          enemyTxt.textContent = "";
+          onComplete();
+        } // Call the callback when dialogue ends
       }
     }
   };
