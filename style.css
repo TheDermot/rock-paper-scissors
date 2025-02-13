@@ -44,7 +44,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: red 1px solid; /* Debugging border, can be removed */
   background: #1a1a1a; /* Dark background color */
 }
 
@@ -86,7 +85,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: green 1px solid; /* Debugging border, can be removed */
   font: 2rem var(--font-family); /* Use the custom font */
   color: rgb(182, 83, 83); /* Primary color for the text */
 }
@@ -368,7 +366,6 @@ body {
 
 /* Container for the attack selection UI */
 .choose-attack {
-  border: 1px red solid; /* Debugging border, can be removed */
   width: 100%;
   height: 100%;
   display: flex;
