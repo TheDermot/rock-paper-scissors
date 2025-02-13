@@ -19,7 +19,7 @@ const enemyScoreDisplay = document.querySelector(".enemy-score");
 // Game State
 let computerScore = 0;
 let humanScore = 0;
-const winsNeeded = 1;
+const winsNeeded = 3;
 const typingSpeed = 90;
 
 // Game Rules
@@ -78,31 +78,31 @@ window.addEventListener("orientationchange", checkOrientation);
 const introDialogues = [
   { speaker: "Knight", text: "Man, these are some nice trees" },
   { speaker: "Necromancer", text: "Who dare trespasses into my domain?" },
-  // { speaker: "Knight", text: "What is a domain?" },
-  // {
-  //   speaker: "Necromancer",
-  //   text: "Fool! None who enter leave alive. Wield your weapon now",
-  // },
-  // { speaker: "Knight", text: "Uhh....I don't have one." },
-  // { speaker: "Knight", text: "Rock Paper Scissors?" },
-  // { speaker: "Necromancer", text: "You dare insult me with childrens games." },
-  // {
-  //   speaker: "Knight",
-  //   text: "Oh so you're just scared you'd lose to me in a childrens game",
-  // },
-  // {
-  //   speaker: "Necromancer",
-  //   text: "Silence, I was the master of Rock Paper Scissors in necromancy school.",
-  // },
-  // {
-  //   speaker: "Knight",
-  //   text: "Ooo, a master. Then we must play. First one to 3 wins. If I win you let me pass and I'll be on my merry way. If I lose, you may kill me",
-  // },
-  // {
-  //   speaker: "Necromancer",
-  //   text: "SSss, you intrique me human. Fine, I'll agree to these terms. Your death will be memorable",
-  // },
-  // { speaker: "Knight", text: "Ha, I'm sure it will be. Ok." },
+  { speaker: "Knight", text: "What is a domain?" },
+  {
+    speaker: "Necromancer",
+    text: "Fool! None who enter leave alive. Wield your weapon now",
+  },
+  { speaker: "Knight", text: "Uhh....I don't have one." },
+  { speaker: "Knight", text: "Rock Paper Scissors?" },
+  { speaker: "Necromancer", text: "You dare insult me with childrens games." },
+  {
+    speaker: "Knight",
+    text: "Oh so you're just scared you'd lose to me in a childrens game",
+  },
+  {
+    speaker: "Necromancer",
+    text: "Silence, I was the master of Rock Paper Scissors in necromancy school.",
+  },
+  {
+    speaker: "Knight",
+    text: "Ooo, a master. Then we must play. First one to 3 wins. If I win you let me pass and I'll be on my merry way. If I lose, you may kill me",
+  },
+  {
+    speaker: "Necromancer",
+    text: "SSss, you intrique me human. Fine, I'll agree to these terms. Your death will be memorable",
+  },
+  { speaker: "Knight", text: "Ha, I'm sure it will be. Ok." },
 ];
 
 // Tie, Win, and Lose Dialogues
@@ -124,22 +124,22 @@ const loseDialogues = {
 // Ending Dialogues
 const endingKnightDialogue = [
   { speaker: "Knight", text: "Ha I win. You lost, your domain is mine now" },
-  // {
-  //   speaker: "Necromancer",
-  //   text: "What foolishness go now before I curse you",
-  // },
-  // {
-  //   speaker: "Knight",
-  //   text: "I'm not joking. Everyone knows when you lose a game of Rock, Paper, Scissors that you fortfiet your domain",
-  // },
-  // {
-  //   speaker: "Necromancer",
-  //   text: "WHAT! Your sniveling tongue shall now lead to your death",
-  // },
-  // {
-  //   speaker: "Knight",
-  //   text: "Leave now before my domain crushes you",
-  // },
+  {
+    speaker: "Necromancer",
+    text: "What foolishness go now before I curse you",
+  },
+  {
+    speaker: "Knight",
+    text: "I'm not joking. Everyone knows when you lose a game of Rock, Paper, Scissors that you fortfiet your domain",
+  },
+  {
+    speaker: "Necromancer",
+    text: "WHAT! Your sniveling tongue shall now lead to your death",
+  },
+  {
+    speaker: "Knight",
+    text: "Leave now before my domain crushes you",
+  },
   {
     speaker: "Necromancer",
     text: "Dieeee",

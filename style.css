@@ -118,7 +118,7 @@ body {
   padding: 0.25rem 1.5rem; /* Padding for the button */
   transition: 1s; /* Smooth transition for hover effects */
   border: 0.6em solid;
-  border-image: url(/images/borderText.png) 15 fill; /* Custom border image */
+  border-image: url(./images/borderText.png) 15 fill; /* Custom border image */
   color: rgba(213, 201, 201, 0.842); /* Secondary color for text */
 }
 
@@ -325,7 +325,7 @@ body {
 .necromancer-text {
   position: relative;
   border: 5px solid;
-  border-image: url(/images/borderText.png) 15 fill; /* Custom border image */
+  border-image: url(./images/borderText.png) 15 fill; /* Custom border image */
   color: rgba(213, 201, 201, 0.842); /* Secondary color for text */
   display: flex;
   width: 4rem; /* Fixed width */
@@ -387,7 +387,7 @@ body {
   height: 10rem;
   width: 15em;
   border: 30px solid;
-  border-image: url(/images/borderText.png) 15 fill; /* Custom border image */
+  border-image: url(./images/borderText.png) 15 fill; /* Custom border image */
 }
 
 /* Attack button styling */
@@ -434,7 +434,7 @@ div .display-countdown {
     width: 9rem;
     font-size: 0.6em; /* Smaller font size */
     border: 20px solid;
-    border-image: url(/images/borderText.png) 15 fill; /* Custom border image */
+    border-image: url(./images/borderText.png) 15 fill; /* Custom border image */
     gap: 1rem; /* Smaller gap between buttons */
   }
   .attacks div {
