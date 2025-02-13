@@ -33,31 +33,31 @@ play.addEventListener("click", () => {
 const dialogues = [
   { speaker: "Knight", text: "Man, these are some nice trees" },
   { speaker: "Necromancer", text: "Who dare trespasses into my domain?" },
-  // { speaker: "Knight", text: "What is a domain?" },
-  // {
-  //   speaker: "Necromancer",
-  //   text: "Fool! None who enter leave alive. Wield your weapon now",
-  // },
-  // { speaker: "Knight", text: "Uhh....I don't have one." },
-  // { speaker: "Knight", text: "Rock Paper Scissors?" },
-  // { speaker: "Necromancer", text: "You dare insult me with childrens games." },
-  // {
-  //   speaker: "Knight",
-  //   text: "Oh so you're just scared you'd lose to me in a childrens game",
-  // },
-  // {
-  //   speaker: "Necromancer",
-  //   text: "Silence, I was the master of Rock Paper Scissors in necromancy school.",
-  // },
-  // {
-  //   speaker: "Knight",
-  //   text: "Ooo, a master. Then we must play. First one to 3 wins. If I win you let me pass and I'll be on my merry way. If I lose, you may kill me",
-  // },
-  // {
-  //   speaker: "Necromancer",
-  //   text: "SSss, you intrique me human. Fine, I'll agree to these terms. Your death will be memorable",
-  // },
-  // { speaker: "Knight", text: "Ha, I'm sure it will be. Ok." },
+  { speaker: "Knight", text: "What is a domain?" },
+  {
+    speaker: "Necromancer",
+    text: "Fool! None who enter leave alive. Wield your weapon now",
+  },
+  { speaker: "Knight", text: "Uhh....I don't have one." },
+  { speaker: "Knight", text: "Rock Paper Scissors?" },
+  { speaker: "Necromancer", text: "You dare insult me with childrens games." },
+  {
+    speaker: "Knight",
+    text: "Oh so you're just scared you'd lose to me in a childrens game",
+  },
+  {
+    speaker: "Necromancer",
+    text: "Silence, I was the master of Rock Paper Scissors in necromancy school.",
+  },
+  {
+    speaker: "Knight",
+    text: "Ooo, a master. Then we must play. First one to 3 wins. If I win you let me pass and I'll be on my merry way. If I lose, you may kill me",
+  },
+  {
+    speaker: "Necromancer",
+    text: "SSss, you intrique me human. Fine, I'll agree to these terms. Your death will be memorable",
+  },
+  { speaker: "Knight", text: "Ha, I'm sure it will be. Ok." },
 ];
 
 const knightTxt = document.querySelector(".knight-text p");
@@ -373,26 +373,26 @@ const enableAttacks = () => {
 };
 
 const endingKnightDialogue = [
-  // { speaker: "Knight", text: "Ha I win. You lost, your domain is mine now" },
-  // {
-  //   speaker: "Necromancer",
-  //   text: "What foolishness go now before I curse you",
-  // },
-  // {
-  //   speaker: "Knight",
-  //   text: "I'm not joking. Everyone knows when you lose a game of Rock, Paper, Scissors that you fortfiet your domain",
-  // },
-  // {
-  //   speaker: "Necromancer",
-  //   text: "WHAT! Your sniveling tongue shall now lead to your death",
-  // },
-  // {
-  //   speaker: "Knight",
-  //   text: "Leave now before my domain crushes you",
-  // },
+  { speaker: "Knight", text: "Ha I win. You lost, your domain is mine now" },
   {
     speaker: "Necromancer",
-    text: "Dieeee",
+    text: "What foolishness go now before I curse you",
+  },
+  {
+    speaker: "Knight",
+    text: "I'm not joking. Everyone knows when you lose a game of Rock, Paper, Scissors that you fortfiet your domain",
+  },
+  {
+    speaker: "Necromancer",
+    text: "WHAT! Your sniveling tongue shall now lead to your death",
+  },
+  {
+    speaker: "Knight",
+    text: "Leave now before my domain crushes you",
+  },
+  {
+    speaker: "Necromancer",
+    text: "Dieeeea",
   },
 ];
 const endingKnightDialogueTwo = [
@@ -403,13 +403,13 @@ const endingKnightDialogueTwo = [
   },
 ];
 const endingNecromancerDialogue = [
-  // {
-  //   speaker: "Necromancer",
-  //   text: "You may die now",
-  // },
-  // { speaker: "Knight", text: "Not if I have anything to say about it!" },
-  // { speaker: "Necromancer", text: "You cannot stop me!" },
-  // { speaker: "Knight", text: "We'll see about that." },
+  {
+    speaker: "Necromancer",
+    text: "You may die now",
+  },
+  { speaker: "Knight", text: "Not if I have anything to say about it!" },
+  { speaker: "Necromancer", text: "You cannot stop me!" },
+  { speaker: "Knight", text: "We'll see about that." },
   { speaker: "Necromancer", text: "Dieeee" },
 ];
 
@@ -426,6 +426,15 @@ const endGame = (winner) => {
     necromancerTextBox.classList.remove("hideItem");
     typeText(endingNecromancerDialogue, () => {
       console.log("Necro");
+      setTimeout(()=>{
+        necromancer.classList.add("necro-attack")
+        setTimeout(()=>{
+          knight.classList.add("knight-hurt")
+          setTimeout(()=>{
+            knight.classList.add("knight-die")
+          })
+        },1000)
+      }, 1000)
     });
   } else {
     knightTextBox.classList.remove("hideItem");
@@ -454,7 +463,7 @@ const endGame = (winner) => {
   }
 };
 
-const winsNeeded = 1;
+const winsNeeded = 3;
 
 const handleAttackClick = (enemy, event) => {
   console.log(enemy);
