@@ -147,10 +147,11 @@ body {
 
 .necromancer {
   width: 160px;
-  height: 100px;
+  height: 160px;
   image-rendering: pixelated;
   position: relative;
   transform: scale(3);
+  background-repeat: no-repeat !important;
   right: 10%;
 
   /* right: -15%; */
@@ -202,11 +203,11 @@ body {
   word-wrap: break-word;
 }
 .necromancer-text {
-  bottom: 1.6em;
+  top: 1.6em;
   left: 0.9em;
 }
 .necromancer-attack-position {
-  bottom: 1.6em;
+  top: 1.6em;
   left: 2.7em;
 }
 
@@ -276,8 +277,8 @@ div .display-countdown {
 .paper-attack,
 .rock-attack,
 .scissors-attack {
-  width: 21px;
-  height: 21px;
+  width: 20px;
+  height: 20px;
   position: relative;
 }
 
