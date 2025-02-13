@@ -7,7 +7,7 @@ const knightTextBox = document.querySelector(".knight-text");
 const necromancerTextBox = document.querySelector(".necromancer-text");
 const attackBox = document.querySelector(".attacks");
 
-function checkOrientation() {
+const checkOrientation = () => {
   const rotateMessage = document.getElementById("rotate-message");
   const container = document.querySelector(".container");
 
@@ -20,17 +20,12 @@ function checkOrientation() {
     rotateMessage.classList.add("hideItem");
     container.classList.remove("hideItem");
   }
-}
+};
 
 // Check orientation on load and resize
 window.addEventListener("load", checkOrientation);
 window.addEventListener("resize", checkOrientation);
 window.addEventListener("orientationchange", checkOrientation);
-
-
-
-
-
 
 play.addEventListener("click", () => {
   welcomeScreen.classList.remove("welcome-screen-entrance");
@@ -162,9 +157,7 @@ const typeText = (dialogues, onComplete) => {
   type(); // Start typing
 };
 
-const rock = "rock";
-const paper = "paper";
-const scissors = "scissors";
+
 
 const attacks = document.querySelectorAll(".attacks div");
 const startButton = document.querySelector(".attacks button");
@@ -181,9 +174,9 @@ const handleAttackChoice = (event) => {
 const getComputerChoice = () => {
   let computerChoice = Math.floor(Math.random() * 3) + 1;
   console.log(`Computer chose: ${computerChoice}`);
-  if (computerChoice === 1) return rock;
-  else if (computerChoice === 2) return paper;
-  else if (computerChoice === 3) return scissors;
+  if (computerChoice === 1) return "rock";
+  else if (computerChoice === 2) return "paper";
+  else if (computerChoice === 3) return "scissors";
 };
 
 // Define dialogues for different enemies
@@ -267,104 +260,93 @@ const updateScoreDisplay = () => {
   knightScoreDisplay.textContent = `${humanScore}`;
   enemyScoreDisplay.textContent = `${computerScore}`;
 };
+const CHOICES = {
+  ROCK: "rock",
+  PAPER: "paper",
+  SCISSORS: "scissors",
+};
 
+const OUTCOMES = {
+  TIE: "tie",
+  COMPUTER: "computer",
+  HUMAN: "human",
+};
+
+const WINNING_RULES = {
+  [CHOICES.ROCK]: CHOICES.SCISSORS, // Rock beats Scissors
+  [CHOICES.PAPER]: CHOICES.ROCK, // Paper beats Rock
+  [CHOICES.SCISSORS]: CHOICES.PAPER, // Scissors beats Paper
+};
+const determineOutcome = (humanSelection, computerSelection) => {
+  const validChoices = Object.values(CHOICES);
+  if (
+    !validChoices.includes(humanSelection) ||
+    !validChoices.includes(computerSelection)
+  ) {
+    throw new Error("Invalid selection");
+  }
+
+  if (humanSelection === computerSelection) {
+    return OUTCOMES.TIE;
+  }
+  if (WINNING_RULES[humanSelection] === computerSelection) {
+    return OUTCOMES.HUMAN;
+  }
+  return OUTCOMES.COMPUTER;
+};
 const playRound = async (humanSelection, computerSelection, enemy) => {
-  // Dynamically reference the enemy's text box
   const enemyTextBox = document.querySelector(`.${enemy.toLowerCase()}-text`);
-  // const enemyTxt = document.querySelector(`.${enemy.toLowerCase()}-text p`);
 
-  //hide attack items, have it say ROCK PAPER SCISSORS SHOOT
+  // Hide attack items and show countdown
   await animateCountdown();
 
-  //hide attack box
+  // Display attack icons
   await displayAttackIcons(humanSelection, computerSelection, enemy);
-  //dialogue
 
-  if (computerSelection === humanSelection) {
-    console.log("Tie");
-    disableAttacks();
-    knightTextBox.classList.remove("hideItem"); // Show Knight's text box for tie
-    typeText(tieDialogues.Knight, () => {
-      // Use Knight's tie dialogue
+  // Determine the outcome
+  const outcome = determineOutcome(humanSelection, computerSelection);
 
-      setTimeout(() => {
-        checkWinner(humanScore, computerScore, enemy);
-      }, 1000);
-    });
-  } else if (computerSelection === paper && humanSelection === rock) {
-    console.log("Paper beats rock. Computer wins round");
-    disableAttacks();
-    computerScore++;
-    updateScoreDisplay();
-    enemyTextBox.classList.remove("hideItem"); // Show enemy's text box
-    typeText(winDialogues[enemy], () => {
-      // Use enemy's lose dialogue
-      setTimeout(() => {
-        attackBox.classList.remove("hideItem");
+  // Handle the outcome
+  switch (outcome) {
+    case OUTCOMES.TIE:
+      console.log("Tie");
+      disableAttacks();
+      knightTextBox.classList.remove("hideItem");
+      typeText(tieDialogues.Knight, () => {
+        setTimeout(() => {
+          checkWinner(humanScore, computerScore, enemy);
+        }, 1000);
+      });
+      break;
 
-        checkWinner(humanScore, computerScore, enemy);
-      }, 1000);
-    });
-  } else if (computerSelection === paper && humanSelection === scissors) {
-    console.log("Scissors beats paper. Human wins round");
-    disableAttacks();
-    humanScore++;
-    updateScoreDisplay();
-    knightTextBox.classList.remove("hideItem"); // Show Knight's text box
-    typeText(winDialogues.Knight, () => {
-      // Use Knight's win dialogue
-      setTimeout(() => {
-        checkWinner(humanScore, computerScore, enemy);
-      }, 1000);
-    });
-  } else if (computerSelection === rock && humanSelection === scissors) {
-    console.log("Rock beats scissors. Computer wins round");
-    disableAttacks();
-    computerScore++;
-    updateScoreDisplay();
-    enemyTextBox.classList.remove("hideItem"); // Show enemy's text box
-    typeText(winDialogues[enemy], () => {
-      // Use enemy's lose dialogue
-      setTimeout(() => {
-        checkWinner(humanScore, computerScore, enemy);
-      }, 1000);
-    });
-  } else if (computerSelection === rock && humanSelection === paper) {
-    console.log("Paper beats rock. Human wins round");
-    disableAttacks();
-    humanScore++;
-    updateScoreDisplay();
-    knightTextBox.classList.remove("hideItem"); // Show Knight's text box
-    typeText(winDialogues.Knight, () => {
-      // Use Knight's win dialogue
-      setTimeout(() => {
-        checkWinner(humanScore, computerScore, enemy);
-      }, 1000);
-    });
-  } else if (computerSelection === scissors && humanSelection === rock) {
-    console.log("Rock beats scissors. Human wins round");
-    disableAttacks();
-    humanScore++;
-    updateScoreDisplay();
-    knightTextBox.classList.remove("hideItem"); // Show Knight's text box
-    typeText(winDialogues.Knight, () => {
-      // Use Knight's win dialogue
-      setTimeout(() => {
-        checkWinner(humanScore, computerScore, enemy);
-      }, 1000);
-    });
-  } else if (computerSelection === scissors && humanSelection === paper) {
-    console.log("Scissors beats paper. Computer wins round");
-    disableAttacks();
-    computerScore++;
-    updateScoreDisplay();
-    enemyTextBox.classList.remove("hideItem"); // Show enemy's text box
-    typeText(winDialogues[enemy], () => {
-      // Use enemy's lose dialogue
-      setTimeout(() => {
-        checkWinner(humanScore, computerScore, enemy);
-      }, 1000);
-    });
+    case OUTCOMES.HUMAN:
+      console.log("Human wins round");
+      disableAttacks();
+      humanScore++;
+      updateScoreDisplay();
+      knightTextBox.classList.remove("hideItem");
+      typeText(winDialogues.Knight, () => {
+        setTimeout(() => {
+          checkWinner(humanScore, computerScore, enemy);
+        }, 1000);
+      });
+      break;
+
+    case OUTCOMES.COMPUTER:
+      console.log("Computer wins round");
+      disableAttacks();
+      computerScore++;
+      updateScoreDisplay();
+      enemyTextBox.classList.remove("hideItem");
+      typeText(winDialogues[enemy], () => {
+        setTimeout(() => {
+          checkWinner(humanScore, computerScore, enemy);
+        }, 1000);
+      });
+      break;
+
+    default:
+      throw new Error("Invalid outcome");
   }
 };
 
@@ -451,15 +433,15 @@ const endGame = (winner) => {
     necromancerTextBox.classList.remove("hideItem");
     typeText(endingNecromancerDialogue, () => {
       console.log("Necro");
-      setTimeout(()=>{
-        necromancer.classList.add("necro-attack")
-        setTimeout(()=>{
-          knight.classList.add("knight-hurt")
-          setTimeout(()=>{
-            knight.classList.add("knight-die")
-          })
-        },1000)
-      }, 1000)
+      setTimeout(() => {
+        necromancer.classList.add("necro-attack");
+        setTimeout(() => {
+          knight.classList.add("knight-hurt");
+          setTimeout(() => {
+            knight.classList.add("knight-die");
+          });
+        }, 1000);
+      }, 1000);
     });
   } else {
     knightTextBox.classList.remove("hideItem");
@@ -518,17 +500,3 @@ startButton.addEventListener("click", () => {
     });
   });
 });
-
-//possible code to reduce playRound if not doing anything dependent on each choice of attack
-
-// const determineOutcome = (humanSelection, computerSelection) => {
-//   if (computerSelection === humanSelection) return "tie";
-//   if (
-//     (computerSelection === paper && humanSelection === rock) ||
-//     (computerSelection === rock && humanSelection === scissors) ||
-//     (computerSelection === scissors && humanSelection === paper)
-//   ) {
-//     return "computer";
-//   }
-//   return "human";
-// };
