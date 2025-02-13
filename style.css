@@ -327,8 +327,8 @@ div .display-countdown {
     transform: scale(3);
   }
   to {
-    bottom: 8%;
-    transform: scale(8);
+    bottom: 2%;
+    transform: scale(5);
   }
 }
 .knight-grow {
@@ -347,12 +347,12 @@ div .display-countdown {
   }
 }
 .necro-attack {
-  animation: necroMoveTowards steps(12) 4s forwards reverse;
+  animation: necroMoveTowards steps(12) 2s forwards reverse;
   background-image: url(./images/necromancer-attack.png);
 }
 
 .necro-hurt {
-  animation: necroHurt steps(4) 1s forwards reverse;
+  animation: necroHurt 1s steps(4) 3 forwards reverse;
   background-image: url(./images/necromancer-hit.png);
 }
 /* Necromancer hurt animation */
@@ -366,14 +366,16 @@ div .display-countdown {
     right: 30%;
   }
 }
-
+.necro-death {
+  animation: necroDeath 1s steps(9) forwards;
+  background-image: url(./images/necromancer-death.png);
+}
 /* Necromancer death animation */
 @keyframes necroDeath {
   from {
-    transform: scale(3);
+    background-position: -1500px 0;
   }
   to {
-    transform: scale(3) translateY(100px);
-    opacity: 0;
+    background-position: 0px 0;
   }
 }

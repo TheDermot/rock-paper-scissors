@@ -395,6 +395,13 @@ const endingKnightDialogue = [
     text: "Dieeee",
   },
 ];
+const endingKnightDialogueTwo = [
+  { speaker: "Knight", text: "That won't work on me" },
+  {
+    speaker: "Necromancer",
+    text: "No no no What is happening AHHHHhhh",
+  },
+];
 const endingNecromancerDialogue = [
   // {
   //   speaker: "Necromancer",
@@ -435,11 +442,14 @@ const endGame = (winner) => {
 
         // After moving, Necromancer gets hurt and dies
         setTimeout(() => {
+          typeText(endingKnightDialogueTwo, ()=>{
+            console.low("part 2")
+          })
           necromancer.classList.add("necro-hurt");
           setTimeout(() => {
-            necromancer.classList.add("necroDeath");
-          }, 1000);
-        }, 4000);
+            necromancer.classList.add("necro-death");
+          }, 3000);
+        }, 5000);
       }, 1000); // Delay before starting animations
     });
   }
