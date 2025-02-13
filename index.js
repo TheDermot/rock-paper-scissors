@@ -7,6 +7,31 @@ const knightTextBox = document.querySelector(".knight-text");
 const necromancerTextBox = document.querySelector(".necromancer-text");
 const attackBox = document.querySelector(".attacks");
 
+function checkOrientation() {
+  const rotateMessage = document.getElementById("rotate-message");
+  const container = document.querySelector(".container");
+
+  if (window.innerHeight > window.innerWidth) {
+    // Portrait mode
+    rotateMessage.classList.remove("hideItem");
+    container.classList.add("hideItem");
+  } else {
+    // Landscape mode
+    rotateMessage.classList.add("hideItem");
+    container.classList.remove("hideItem");
+  }
+}
+
+// Check orientation on load and resize
+window.addEventListener("load", checkOrientation);
+window.addEventListener("resize", checkOrientation);
+window.addEventListener("orientationchange", checkOrientation);
+
+
+
+
+
+
 play.addEventListener("click", () => {
   welcomeScreen.classList.remove("welcome-screen-entrance");
   welcomeScreen.classList.add("welcome-screen-hide");
