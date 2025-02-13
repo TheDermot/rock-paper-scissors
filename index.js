@@ -84,8 +84,6 @@ const knightTxt = document.querySelector(".knight-text p");
 // const necromancerTxt = document.querySelector(".necromancer-text p");
 let enemyTxt = "";
 
-let dialogueIndex = 0;
-let charIndex = 0;
 let typingSpeed = 90;
 
 const typeText = (dialogues, onComplete) => {
@@ -340,7 +338,7 @@ const playRound = async (humanSelection, computerSelection, enemy) => {
       enemyTextBox.classList.remove("hideItem");
       typeText(winDialogues[enemy], () => {
         setTimeout(() => {
-          checkWinner(humanScore, computerScore, enemy);
+          checkWinner(humanScore, computerScore, enemy); 
         }, 1000);
       });
       break;
