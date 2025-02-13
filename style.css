@@ -1,337 +1,473 @@
+/* ====================== */
+/* General Reset and Base Styles */
+/* ====================== */
+
+/* Reset all margins and padding to ensure consistency across browsers */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Ensures padding and border are included in element dimensions */
 }
 
+/* Base font size for the document */
 html {
   font-size: 16px;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+/* ====================== */
+/* CSS Variables (Custom Properties) */
+/* ====================== */
+
+:root {
+  --primary-color: rgb(
+    182,
+    83,
+    83
+  ); /* Primary color used throughout the site */
+  --secondary-color: rgba(
+    213,
+    201,
+    201,
+    0.842
+  ); /* Secondary color for accents */
+  --font-family: "Pixelify Sans"; /* Default font family for the project */
 }
 
-ul,
-ol {
-  list-style: none;
-}
-:root {
-  --primary-color: rgb(182, 83, 83);
-  --secondary-color: rgba(213, 201, 201, 0.842);
-  --font-family: "Pixelify Sans";
-}
+/* ====================== */
+/* Body and Container Styles */
+/* ====================== */
+
+/* Center the content and set a dark background */
 body {
   width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: red 1px solid;
-  background: #1a1a1a;
+  border: red 1px solid; /* Debugging border, can be removed */
+  background: #1a1a1a; /* Dark background color */
 }
 
+/* Utility class to hide elements */
 .hideItem {
   display: none !important;
 }
+
+/* Main container for the game */
 .container {
-  background-image: url("./images/Background.png");
-  background-size: contain;
+  background-image: url("./images/Background.png"); /* Game background image */
+  background-size: contain; /* Ensure the background fits within the container */
   min-width: 80vw;
   max-width: 640px;
   max-height: 80vh;
-  image-rendering: pixelated;
-  border: 8px solid #555;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-  aspect-ratio: 4 / 3;
+  image-rendering: pixelated; /* Ensures pixel art looks crisp */
+  border: 8px solid #555; /* Border around the game container */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); /* Subtle white shadow */
+  aspect-ratio: 4 / 3; /* Maintain a 4:3 aspect ratio */
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  overflow: hidden;
+  justify-content: flex-end; /* Align content to the bottom */
+  overflow: hidden; /* Prevent content from overflowing */
   position: absolute;
-  z-index: 1;
+  z-index: 1; /* Ensure the container is above other elements */
 }
+
+/* ====================== */
+/* Rotate Message (for mobile devices) */
+/* ====================== */
+
+/* Message prompting users to rotate their device */
 #rotate-message {
   font-size: 1.5em;
   text-align: center;
-  z-index: 1000;
+  z-index: 1000; /* Ensure it's on top of everything */
   height: 100vh;
   width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: green 1px solid;
-  font: 2rem var(--font-family);
-  color: rgb(182, 83, 83);
+  border: green 1px solid; /* Debugging border, can be removed */
+  font: 2rem var(--font-family); /* Use the custom font */
+  color: rgb(182, 83, 83); /* Primary color for the text */
 }
 
-.hideItem {
-  display: none !important;
-}
+/* ====================== */
+/* Welcome Screen Styles */
+/* ====================== */
+
+/* Welcome screen with game title and play button */
 .welcome-screen {
   width: 100%;
   height: 100%;
-  background-color: rgba(85, 129, 85, 0.16);
+  background-color: rgba(85, 129, 85, 0.16); /* Semi-transparent background */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  color: rgb(182, 83, 83);
-  font: 2em var(--font-family);
-  transform: translateY(-100%);
+  justify-content: space-evenly; /* Space out title and button */
+  color: rgb(182, 83, 83); /* Primary color for text */
+  font: 2em var(--font-family); /* Custom font and size */
+  transform: translateY(-100%); /* Start off-screen */
   position: absolute;
-  z-index: 2;
+  z-index: 2; /* Above the game container */
 }
+
+/* Play button styling */
 .welcome-screen button {
-  font: 1.6em var(--font-family);
-  background-color: transparent;
-  padding: 0.25rem 1.5rem;
-  transition: 1s;
+  font: 1.6em var(--font-family); /* Custom font and size */
+  background-color: transparent; /* Transparent background */
+  padding: 0.25rem 1.5rem; /* Padding for the button */
+  transition: 1s; /* Smooth transition for hover effects */
   border: 0.6em solid;
-  border-image: url(/images/borderText.png) 15 fill;
-  color: rgba(213, 201, 201, 0.842);
+  border-image: url(/images/borderText.png) 15 fill; /* Custom border image */
+  color: rgba(213, 201, 201, 0.842); /* Secondary color for text */
 }
+
+/* Hover effect for the play button */
 .welcome-screen button:hover {
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.986);
+  color: rgba(255, 255, 255, 0.986); /* Brighter text color on hover */
   padding-left: 0;
   padding-right: 0;
 }
+
+/* Media query for landscape mode on smaller screens */
 @media (orientation: landscape) and (max-width: 1024px) {
   .welcome-screen {
-    font-size: 1.5em;
-    justify-content: center;
+    font-size: 1.5em; /* Smaller font size */
+    justify-content: center; /* Center content vertically */
   }
   .welcome-screen button {
-    font-size: 1.2em;
-    padding: 0.15rem 1rem;
-    margin-top: 1rem;
+    font-size: 1.2em; /* Smaller button font size */
+    padding: 0.15rem 1rem; /* Smaller padding */
+    margin-top: 1rem; /* Add margin to the top */
   }
 }
+
+/* Animation for the welcome screen entrance */
 .welcome-screen-entrance {
-  animation: welcomeDown 3s ease-out forwards;
+  animation: welcomeDown 3s ease-out forwards; /* Slide down animation */
 }
 
+/* Animation for the welcome screen exit */
 .welcome-screen-hide {
-  animation: welcomeUp 2s ease-out forwards;
+  animation: welcomeUp 2s ease-out forwards; /* Slide up animation */
 }
 
+/* Keyframes for the welcome screen slide down */
 @keyframes welcomeDown {
   from {
-    transform: translateY(-100%);
+    transform: translateY(-100%); /* Start off-screen */
   }
   to {
-    transform: translateY(0);
+    transform: translateY(0); /* Slide into view */
   }
 }
 
+/* Keyframes for the welcome screen slide up */
 @keyframes welcomeUp {
   from {
-    transform: translateY(0);
+    transform: translateY(0); /* Start in view */
   }
   to {
-    transform: translateY(-100%);
+    transform: translateY(-100%); /* Slide off-screen */
   }
 }
+/* Winning Screen Styles */
+.winning-screen {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(85, 129, 85, 0.16); /* Semi-transparent background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgb(182, 83, 83); /* Primary color for text */
+  font: 3em var(--font-family); /* Larger font size for h1 */
+  position: absolute;
+  z-index: 3; /* Above the game container */
+  transform: translateY(-100%); /* Start off-screen */
+  animation: welcomeDown 2s ease-out forwards; /* Slide down animation */
+}
 
+.winning-screen h1 {
+  font-size: 4rem; /* Even larger font size for the heading */
+  margin-bottom: 1rem; /* Space below the heading */
+}
+
+.winning-screen p {
+  font-size: 2rem; /* Smaller font size for the paragraphs */
+  margin: 0.5rem 0; /* Space between paragraphs */
+}
+
+/* ====================== */
+/* Platform and Arena Styles */
+/* ====================== */
+
+/* Platform at the bottom of the screen */
 .platform {
   width: 100%;
-  height: 12%;
+  height: 12%; /* Height of the platform */
 }
+
+/* Arena where the knight and necromancer battle */
 .arena {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  justify-content: space-between; /* Space out the knight and necromancer */
+  align-items: flex-end; /* Align characters to the bottom */
 }
+
+/* ====================== */
+/* Knight Styles */
+/* ====================== */
+
+/* Knight character styling */
 .knight {
   width: 32px;
   height: 26px;
-  background: url("./images/knight-walk.png") no-repeat;
-  image-rendering: pixelated;
-  transform: scale(3);
+  background: url("./images/knight-walk.png") no-repeat; /* Knight sprite */
+  image-rendering: pixelated; /* Ensure pixel art looks crisp */
+  transform: scale(3); /* Scale up the sprite */
   position: relative;
-  right: 20%;
+  right: 20%; /* Position the knight */
 }
+
+/* Media query for landscape mode on smaller screens */
 @media (orientation: landscape) and (max-width: 1024px) {
   .knight {
-    transform: scale(2);
-    height: 24px;
+    transform: scale(2); /* Smaller scale for smaller screens */
+    height: 24px; /* Adjust height */
   }
 }
+
+/* Animation for the knight's entrance */
 .knight-entrance {
   animation: knightWalk 1s steps(7) 4 forwards, knightMove 4s linear 1 forwards;
 }
+
+/* Keyframes for the knight's walking animation */
 @keyframes knightWalk {
   from {
-    background-position: 0px 0;
+    background-position: 0px 0; /* Start of the sprite sheet */
   }
   to {
-    background-position: -224px 0;
-  }
-}
-@keyframes knightMove {
-  from {
-    left: 0%;
-  }
-  to {
-    left: 30%;
+    background-position: -224px 0; /* End of the sprite sheet */
   }
 }
 
+/* Keyframes for the knight's movement across the screen */
+@keyframes knightMove {
+  from {
+    left: 0%; /* Start position */
+  }
+  to {
+    left: 30%; /* End position */
+  }
+}
+
+/* ====================== */
+/* Necromancer Styles */
+/* ====================== */
+
+/* Necromancer character styling */
 .necromancer {
   width: 160px;
   height: 160px;
-  image-rendering: pixelated;
+  image-rendering: pixelated; /* Ensure pixel art looks crisp */
   position: relative;
-  transform: scale(3);
-  background-repeat: no-repeat !important;
-  right: 10%;
-
-  /* right: -15%; */
+  transform: scale(3); /* Scale up the sprite */
+  background-repeat: no-repeat !important; /* Ensure the sprite doesn't repeat */
+  right: 10%; /* Position the necromancer */
 }
+
+/* Media query for landscape mode on smaller screens */
 @media (orientation: landscape) and (max-width: 1024px) {
   .necromancer {
     width: 120px;
     height: 145px;
-    transform: scale(2);
+    transform: scale(2); /* Smaller scale for smaller screens */
   }
 }
+
+/* Animation for the necromancer's entrance */
 .necromancer-entrance {
-  background: url("./images/necromancer-idle.png");
+  background: url("./images/necromancer-idle.png"); /* Necromancer idle sprite */
   animation: necroRun 1s steps(7) 4 forwards, necroMove 4s linear 1 forwards;
 }
 
+/* Keyframes for the necromancer's running animation */
 @keyframes necroRun {
   from {
-    background-position: 0px 0;
+    background-position: 0px 0; /* Start of the sprite sheet */
   }
   to {
-    background-position: -1119px 0;
-  }
-}
-@keyframes necroMove {
-  from {
-    right: 0%;
-  }
-  to {
-    right: 30%;
+    background-position: -1119px 0; /* End of the sprite sheet */
   }
 }
 
+/* Keyframes for the necromancer's movement across the screen */
+@keyframes necroMove {
+  from {
+    right: 0%; /* Start position */
+  }
+  to {
+    right: 30%; /* End position */
+  }
+}
+
+/* ====================== */
+/* Text Box Styles */
+/* ====================== */
+
+/* Text boxes for knight and necromancer dialogue */
 .knight-text,
 .necromancer-text {
   position: relative;
   border: 5px solid;
-  border-image: url(/images/borderText.png) 15 fill;
-  color: rgba(213, 201, 201, 0.842);
+  border-image: url(/images/borderText.png) 15 fill; /* Custom border image */
+  color: rgba(213, 201, 201, 0.842); /* Secondary color for text */
   display: flex;
-  width: 4rem;
-  height: max(1.6rem);
-  overflow: hidden;
+  width: 4rem; /* Fixed width */
+  height: max(1.6rem); /* Dynamic height based on content */
+  overflow: hidden; /* Prevent text from overflowing */
 }
+
+/* Positioning for the knight's text box */
 .knight-text,
 .knight-attack-position {
   bottom: 1.5em;
   left: 1.35em;
 }
+
+/* Text styling inside the text boxes */
 .knight-text p,
 .necromancer-text p {
   width: 100%;
   font-size: 10px;
-  font-size: 6px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
+  font-size: 6px; /* Small font size for dialogue */
+  white-space: pre-wrap; /* Preserve line breaks */
+  word-wrap: break-word; /* Ensure long words break */
 }
+
+/* Positioning for the necromancer's text box */
 .necromancer-text {
   top: 1.6em;
   left: 0.9em;
 }
+
+/* Positioning for the necromancer's attack icon */
 .necromancer-attack-position {
   top: 1.6em;
   left: 2.7em;
 }
 
+/* ====================== */
+/* Attack Selection Styles */
+/* ====================== */
+
+/* Container for the attack selection UI */
 .choose-attack {
-  border: 1px red solid;
+  border: 1px red solid; /* Debugging border, can be removed */
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  z-index: 1;
+  z-index: 1; /* Above the game container */
 }
 
+/* Attack buttons container */
 .attacks {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 3rem; /* Space between attack buttons */
   height: 10rem;
   width: 15em;
   border: 30px solid;
-  border-image: url(/images/borderText.png) 15 fill;
+  border-image: url(/images/borderText.png) 15 fill; /* Custom border image */
 }
 
+/* Attack button styling */
 .attacks button {
   border: none;
   padding: 0;
   background: none;
-  font: 3em var(--font-family);
-  color: rgb(191, 173, 173);
+  font: 3em var(--font-family); /* Custom font and size */
+  color: rgb(191, 173, 173); /* Secondary color for text */
 }
+
+/* Hover effect for attack buttons */
 .attacks button:hover {
-  font-size: 3.5em;
+  font-size: 3.5em; /* Slightly larger on hover */
   cursor: pointer;
 }
+
+/* Attack icons (rock, paper, scissors) */
 .attacks div {
   width: 20px;
   height: 26px;
-  transform: scale(3);
-  image-rendering: pixelated;
+  transform: scale(3); /* Scale up the icons */
+  image-rendering: pixelated; /* Ensure pixel art looks crisp */
 }
+
+/* Hover effect for attack icons */
 .attacks div:hover {
   cursor: pointer;
-  transform: scale(3.5);
+  transform: scale(3.5); /* Slightly larger on hover */
 }
+
+/* Countdown display during attack selection */
 div .display-countdown {
   width: fit-content;
-  font: small var(--font-family);
+  font: small var(--font-family); /* Custom font and size */
   padding-top: 0.35em;
-  color: rgb(191, 173, 173);
+  color: rgb(191, 173, 173); /* Secondary color for text */
 }
+
+/* Media query for landscape mode on smaller screens */
 @media (orientation: landscape) and (max-width: 1024px) {
   .attacks {
     height: 6rem;
     width: 9rem;
-    font-size: 0.6em;
+    font-size: 0.6em; /* Smaller font size */
     border: 20px solid;
-    border-image: url(/images/borderText.png) 15 fill;
-    gap: 1rem;
+    border-image: url(/images/borderText.png) 15 fill; /* Custom border image */
+    gap: 1rem; /* Smaller gap between buttons */
   }
   .attacks div {
-    transform: scale(1.5);
+    transform: scale(1.5); /* Smaller scale for smaller screens */
   }
 }
+
+/* ====================== */
+/* Attack Icon Animations */
+/* ====================== */
+
+/* Paper attack icon */
 .paper,
 .paper-attack {
-  background: url(./images/paper.png) no-repeat;
-  animation: paperBob 1s steps(6) infinite;
+  background: url(./images/paper.png) no-repeat; /* Paper sprite */
+  animation: paperBob 1s steps(6) infinite; /* Bobbing animation */
 }
+
+/* Rock attack icon */
 .rock,
 .rock-attack {
-  background: url(./images/rock.png) no-repeat;
-  animation: rockBob 1s steps(6) infinite;
+  background: url(./images/rock.png) no-repeat; /* Rock sprite */
+  animation: rockBob 1s steps(6) infinite; /* Bobbing animation */
 }
+
+/* Scissors attack icon */
 .scissors,
 .scissors-attack {
-  background: url(./images/scissors.png) no-repeat;
-  animation: rockBob 1s steps(6) infinite;
+  background: url(./images/scissors.png) no-repeat; /* Scissors sprite */
+  animation: rockBob 1s steps(6) infinite; /* Bobbing animation */
 }
+
+/* Positioning for attack icons */
 .paper-attack,
 .rock-attack,
 .scissors-attack {
@@ -340,46 +476,61 @@ div .display-countdown {
   position: relative;
 }
 
+/* Keyframes for paper bobbing animation */
 @keyframes paperBob {
   from {
-    background-position: 0px 0;
+    background-position: 0px 0; /* Start of the sprite sheet */
   }
   to {
-    background-position: -108px 0;
-  }
-}
-@keyframes rockBob {
-  from {
-    background-position: 0px 0;
-  }
-  to {
-    background-position: -114px 0;
-  }
-}
-@keyframes scissorsBob {
-  from {
-    background-position: 0px 0;
-  }
-  to {
-    background-position: -114px 0;
+    background-position: -108px 0; /* End of the sprite sheet */
   }
 }
 
+/* Keyframes for rock bobbing animation */
+@keyframes rockBob {
+  from {
+    background-position: 0px 0; /* Start of the sprite sheet */
+  }
+  to {
+    background-position: -114px 0; /* End of the sprite sheet */
+  }
+}
+
+/* Keyframes for scissors bobbing animation */
+@keyframes scissorsBob {
+  from {
+    background-position: 0px 0; /* Start of the sprite sheet */
+  }
+  to {
+    background-position: -114px 0; /* End of the sprite sheet */
+  }
+}
+
+/* ====================== */
+/* Scoreboard Styles */
+/* ====================== */
+
+/* Scoreboard container */
 .scoreboard {
   width: 100%;
   height: 35%;
   display: flex;
   align-items: center;
-  color: rgb(182, 83, 83);
-  font: 4em var(--font-family);
+  color: rgb(182, 83, 83); /* Primary color for text */
+  font: 4em var(--font-family); /* Custom font and size */
 }
+
+/* Score display for knight and necromancer */
 .scoreboard span {
   width: 100%;
   text-align: center;
 }
 
-/* Knight growing animation */
-/* Default keyframes with CSS variable */
+/* ====================== */
+/* Knight Growing Animation */
+/* ====================== */
+
+/* Keyframes for the knight growing animation */
 @keyframes knightGrow {
   from {
     bottom: 0%;
@@ -391,112 +542,138 @@ div .display-countdown {
     bottom: 2%;
     transform: scale(5);
     background-position: -224px 0;
-    left: var(--left-end, 55%);
+    left: var(--left-end, 55%); /* Use CSS variable for end position */
   }
 }
-/* Media queries to adjust --left-end */
+
+/* Media queries to adjust the end position of the knight's growth animation */
 @media (orientation: landscape) and (max-width: 1024px) {
   :root {
-    --left-end: 60%;
+    --left-end: 60%; /* Adjust for landscape mode on smaller screens */
   }
 }
 
 @media (min-width: 1330px) {
   :root {
-    --left-end: 58%;
+    --left-end: 58%; /* Adjust for larger screens */
   }
 }
 
 @media (min-width: 1630px) {
   :root {
-    --left-end: 60%;
+    --left-end: 60%; /* Adjust for even larger screens */
   }
 }
 
 @media (min-width: 1930px) {
   :root {
-    --left-end: 62%;
+    --left-end: 62%; /* Adjust for very large screens */
   }
 }
 
 @media (min-width: 2330px) {
   :root {
-    --left-end: 63%;
+    --left-end: 63%; /* Adjust for extra large screens */
   }
 }
+
+/* Class to apply the knight growing animation */
 .knight-grow {
   animation: knightGrow 1s steps(7) forwards;
 }
 
-/* Necromancer moving towards Knight */
+/* ====================== */
+/* Necromancer Attack and Hurt Animations */
+/* ====================== */
+
+/* Keyframes for the necromancer moving towards the knight */
 @keyframes necroMoveTowards {
   from {
     right: 30%;
-    background-position: -1920px 0;
+    background-position: -1920px 0; /* Start of the sprite sheet */
   }
   to {
-    background-position: 0px 0;
+    background-position: 0px 0; /* End of the sprite sheet */
     right: 30%;
   }
-}
-.necro-attack {
-  animation: necroMoveTowards steps(12) 2s forwards reverse;
-  background-image: url(./images/necromancer-attack.png);
 }
 
+/* Class to apply the necromancer attack animation */
+.necro-attack {
+  animation: necroMoveTowards steps(12) 2s forwards reverse;
+  background-image: url(./images/necromancer-attack.png); /* Attack sprite */
+}
+
+/* Class to apply the necromancer hurt animation */
 .necro-hurt {
   animation: necroHurt 1s steps(4) 3 forwards reverse;
-  background-image: url(./images/necromancer-hit.png);
+  background-image: url(./images/necromancer-hit.png); /* Hurt sprite */
 }
-/* Necromancer hurt animation */
+
+/* Keyframes for the necromancer hurt animation */
 @keyframes necroHurt {
   from {
-    background-position: -640px 0;
+    background-position: -640px 0; /* Start of the sprite sheet */
     right: 30%;
   }
   to {
-    background-position: 0px 0;
+    background-position: 0px 0; /* End of the sprite sheet */
     right: 30%;
   }
 }
+
+/* Class to apply the necromancer death animation */
 .necro-death {
   animation: necroDeath 1s steps(9) forwards;
-  background-image: url(./images/necromancer-death.png);
+  background-image: url(./images/necromancer-death.png); /* Death sprite */
 }
-/* Necromancer death animation */
+
+/* Keyframes for the necromancer death animation */
 @keyframes necroDeath {
   from {
-    background-position: -1500px 0;
+    background-position: -1500px 0; /* Start of the sprite sheet */
   }
   to {
-    background-position: 0px 0;
+    background-position: 0px 0; /* End of the sprite sheet */
   }
 }
+
+/* ====================== */
+/* Knight Hurt and Death Animations */
+/* ====================== */
+
+/* Class to apply the knight hurt animation */
 .knight-hurt {
   animation: knightHurt 1s steps(3) 2 forwards;
-  background-image: url(./images/knight-hit.png);
+  background-image: url(./images/knight-hit.png); /* Hurt sprite */
 }
+
+/* Keyframes for the knight hurt animation */
 @keyframes knightHurt {
   from {
-    background-position: 0px 0;
+    background-position: 0px 0; /* Start of the sprite sheet */
     left: 30%;
   }
   to {
-    background-position: -96px 0;
+    background-position: -96px 0; /* End of the sprite sheet */
     left: 30%;
   }
 }
+
+/* Class to apply the knight death animation */
 .knight-die {
   animation: knightDie 1s steps(3) 1 forwards;
-  background-image: url(./images/knight-die.png);
+  background-image: url(./images/knight-die.png); /* Death sprite */
 }
+
+/* Keyframes for the knight death animation */
 @keyframes knightDie {
   from {
-    background-position: 0px 0;
+    background-position: 0px 0; /* Start of the sprite sheet */
     left: 30%;
   }
   to {
-    background-position: -100px 0;
+    background-position: -100px 0; /* End of the sprite sheet */
     left: 30%;
   }
 }

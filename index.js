@@ -300,6 +300,9 @@ const endGame = (winner) => {
           knight.classList.add("knight-hurt");
           setTimeout(() => {
             knight.classList.add("knight-die");
+            const enemyWinningScreen =
+              document.getElementById("enemyWinningScreen");
+            enemyWinningScreen.classList.remove("hideItem");
           });
         }, 1000);
       }, 1000);
@@ -328,6 +331,10 @@ const endGame = (winner) => {
           });
           setTimeout(() => {
             necromancer.classList.add("necro-death");
+            const knightWinningScreen = document.getElementById(
+              "knightWinningScreen"
+            );
+            knightWinningScreen.classList.remove("hideItem");
           }, 3000);
         }, 1000);
       }, 1000); // Delay before starting animations
