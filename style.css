@@ -309,7 +309,7 @@ div .display-countdown {
     border-image: url(/images/borderText.png) 15 fill;
     gap: 1rem;
   }
-  .attacks div{
+  .attacks div {
     transform: scale(1.5);
   }
 }
@@ -375,6 +375,7 @@ div .display-countdown {
 }
 
 /* Knight growing animation */
+/* Default keyframes with CSS variable */
 @keyframes knightGrow {
   from {
     bottom: 0%;
@@ -386,7 +387,37 @@ div .display-countdown {
     bottom: 2%;
     transform: scale(5);
     background-position: -224px 0;
-    left: 55%;
+    left: var(--left-end, 55%);
+  }
+}
+/* Media queries to adjust --left-end */
+@media (orientation: landscape) and (max-width: 1024px) {
+  :root {
+    --left-end: 60%;
+  }
+}
+
+@media (min-width: 1330px) {
+  :root {
+    --left-end: 58%;
+  }
+}
+
+@media (min-width: 1630px) {
+  :root {
+    --left-end: 60%;
+  }
+}
+
+@media (min-width: 1930px) {
+  :root {
+    --left-end: 62%;
+  }
+}
+
+@media (min-width: 2330px) {
+  :root {
+    --left-end: 63%;
   }
 }
 .knight-grow {
