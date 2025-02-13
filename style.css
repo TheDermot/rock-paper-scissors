@@ -325,14 +325,18 @@ div .display-countdown {
   from {
     bottom: 0%;
     transform: scale(3);
+    background-position: 0px 0;
+    left: 30%
   }
   to {
     bottom: 2%;
     transform: scale(5);
+    background-position: -224px 0;
+    left: 55%;
   }
 }
 .knight-grow {
-  animation: knightGrow 4s forwards;
+  animation: knightGrow 1s steps(7) forwards;
 }
 
 /* Necromancer moving towards Knight */

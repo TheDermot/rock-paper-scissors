@@ -435,21 +435,20 @@ const endGame = (winner) => {
 
       // Trigger animations after the dialogue
       setTimeout(() => {
-        // Knight grows in scale
-
-        // Necromancer moves towards Knight
+        // Necromancer attack Knight
         necromancer.classList.add("necro-attack");
+        knight.classList.add("knight-grow");
 
-        // After moving, Necromancer gets hurt and dies
+        // After, Necromancer gets hurt and dies
         setTimeout(() => {
-          typeText(endingKnightDialogueTwo, ()=>{
-            console.low("part 2")
-          })
           necromancer.classList.add("necro-hurt");
           setTimeout(() => {
             necromancer.classList.add("necro-death");
+            typeText(endingKnightDialogueTwo, () => {
+              console.log("part 2");
+            });
           }, 3000);
-        }, 5000);
+        }, 1000);
       }, 1000); // Delay before starting animations
     });
   }
