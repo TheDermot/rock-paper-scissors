@@ -159,7 +159,7 @@ body {
     transform: translateY(-100%); /* Start off-screen */
   }
   to {
-    transform: translateY(0); /* Slide into view */
+    transform: translateY(0); /* Slide into  view */
   }
 }
 
