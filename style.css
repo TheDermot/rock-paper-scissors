@@ -123,7 +123,7 @@ body {
   image-rendering: pixelated;
   transform: scale(3);
   position: relative;
-  right: 20%;
+  /* right: 20%; */
 }
 .knight-entrance {
   animation: knightWalk 1s steps(7) 4 forwards, knightMove 4s linear 1 forwards;
@@ -147,24 +147,25 @@ body {
 
 .necromancer {
   width: 160px;
-  height: 74px;
-  background: url("./images/necromancer-run.png") no-repeat;
+  height: 100px;
   image-rendering: pixelated;
-  transform: scale(3);
   position: relative;
-  right: -15%;
+  transform: scale(3);
+  right: 10%;
+
+  /* right: -15%; */
 }
 .necromancer-entrance {
-  animation: necroRun 1s steps(7) 4 forwards reverse,
-    necroMove 4s linear 1 forwards;
+  background: url("./images/necromancer-idle.png");
+  animation: necroRun 1s steps(7) 4 forwards, necroMove 4s linear 1 forwards;
 }
 
 @keyframes necroRun {
   from {
-    background-position: -1120px 0;
+    background-position: 0px 0;
   }
   to {
-    background-position: 0 0;
+    background-position: -1119px 0;
   }
 }
 @keyframes necroMove {
@@ -316,4 +317,62 @@ div .display-countdown {
 .scoreboard span {
   width: 100%;
   text-align: center;
+}
+
+/* Knight growing animation */
+@keyframes knightGrow {
+  from {
+    bottom: 0%;
+    transform: scale(3);
+  }
+  to {
+    bottom: 8%;
+    transform: scale(8);
+  }
+}
+.knight-grow {
+  animation: knightGrow 4s forwards;
+}
+
+/* Necromancer moving towards Knight */
+@keyframes necroMoveTowards {
+  from {
+    right: 30%;
+    background-position: -1920px 0;
+  }
+  to {
+    background-position: 0px 0;
+    right: 30%;
+  }
+}
+.necro-attack {
+  animation: necroMoveTowards steps(12) 4s forwards reverse;
+  background-image: url(./images/necromancer-attack.png);
+}
+
+.necro-hurt {
+  animation: necroHurt steps(4) 1s forwards reverse;
+  background-image: url(./images/necromancer-hit.png);
+}
+/* Necromancer hurt animation */
+@keyframes necroHurt {
+  from {
+    background-position: -640px 0;
+    right: 30%;
+  }
+  to {
+    background-position: 0px 0;
+    right: 30%;
+  }
+}
+
+/* Necromancer death animation */
+@keyframes necroDeath {
+  from {
+    transform: scale(3);
+  }
+  to {
+    transform: scale(3) translateY(100px);
+    opacity: 0;
+  }
 }

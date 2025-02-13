@@ -62,6 +62,7 @@ const dialogues = [
 
 const knightTxt = document.querySelector(".knight-text p");
 // const necromancerTxt = document.querySelector(".necromancer-text p");
+let enemyTxt = "";
 
 let dialogueIndex = 0;
 let charIndex = 0;
@@ -80,12 +81,15 @@ const typeText = (dialogues, onComplete) => {
 
   const type = () => {
     let textBox = "";
+
     const currentDialogue = dialogues[dialogueIndex];
     if (currentDialogue.speaker === "Knight") textBox = knightTxt;
-    else
-      textBox = document.querySelector(
+    else {
+      enemyTxt = document.querySelector(
         `.${currentDialogue.speaker.toLowerCase()}-text p`
       );
+      textBox = enemyTxt;
+    }
 
     if (charIndex === 0) {
       textBox.textContent = "";
@@ -121,7 +125,11 @@ const typeText = (dialogues, onComplete) => {
             removeTextBox.classList.add("hideItem");
           }, 1000);
         });
-        if (onComplete) onComplete(); // Call the callback when dialogue ends
+        if (onComplete) {
+          knightTxt.textContent = "";
+          enemyTxt.textContent = "";
+          onComplete();
+        } // Call the callback when dialogue ends
       }
     }
   };
@@ -365,10 +373,37 @@ const enableAttacks = () => {
 };
 
 const endingKnightDialogue = [
-  { speaker: "Knight", text: "AHHHH you are deeeeeeead socuk" },
+  // { speaker: "Knight", text: "Ha I win. You lost, your domain is mine now" },
+  // {
+  //   speaker: "Necromancer",
+  //   text: "What foolishness go now before I curse you",
+  // },
+  // {
+  //   speaker: "Knight",
+  //   text: "I'm not joking. Everyone knows when you lose a game of Rock, Paper, Scissors that you fortfiet your domain",
+  // },
+  // {
+  //   speaker: "Necromancer",
+  //   text: "WHAT! Your sniveling tongue shall now lead to your death",
+  // },
+  // {
+  //   speaker: "Knight",
+  //   text: "Leave now before my domain crushes you",
+  // },
+  {
+    speaker: "Necromancer",
+    text: "Dieeee",
+  },
 ];
 const endingNecromancerDialogue = [
-  { speaker: "Necromancer", text: "Boom shacka lacka" },
+  // {
+  //   speaker: "Necromancer",
+  //   text: "You may die now",
+  // },
+  // { speaker: "Knight", text: "Not if I have anything to say about it!" },
+  // { speaker: "Necromancer", text: "You cannot stop me!" },
+  // { speaker: "Knight", text: "We'll see about that." },
+  { speaker: "Necromancer", text: "Dieeee" },
 ];
 
 const endGame = (winner) => {
@@ -378,22 +413,39 @@ const endGame = (winner) => {
   knightScoreDisplay.textContent = "0";
   enemyScoreDisplay.classList.add("hideItem");
   enemyScoreDisplay.textContent = "0";
+
   if (winner === "necromancer") {
+    knightTextBox.classList.remove("hideItem");
     necromancerTextBox.classList.remove("hideItem");
-    console.log(endingNecromancerDialogue);
     typeText(endingNecromancerDialogue, () => {
       console.log("Necro");
     });
   } else {
-    console.log(endingKnightDialogue);
     knightTextBox.classList.remove("hideItem");
+    necromancerTextBox.classList.remove("hideItem");
     typeText(endingKnightDialogue, () => {
       console.log("knight");
+
+      // Trigger animations after the dialogue
+      setTimeout(() => {
+        // Knight grows in scale
+
+        // Necromancer moves towards Knight
+        necromancer.classList.add("necro-attack");
+
+        // After moving, Necromancer gets hurt and dies
+        setTimeout(() => {
+          necromancer.classList.add("necro-hurt");
+          setTimeout(() => {
+            necromancer.classList.add("necroDeath");
+          }, 1000);
+        }, 4000);
+      }, 1000); // Delay before starting animations
     });
   }
 };
 
-const winsNeeded = 3;
+const winsNeeded = 1;
 
 const handleAttackClick = (enemy, event) => {
   console.log(enemy);
@@ -423,3 +475,17 @@ startButton.addEventListener("click", () => {
     });
   });
 });
+
+//possible code to reduce playRound if not doing anything dependent on each choice of attack
+
+// const determineOutcome = (humanSelection, computerSelection) => {
+//   if (computerSelection === humanSelection) return "tie";
+//   if (
+//     (computerSelection === paper && humanSelection === rock) ||
+//     (computerSelection === rock && humanSelection === scissors) ||
+//     (computerSelection === scissors && humanSelection === paper)
+//   ) {
+//     return "computer";
+//   }
+//   return "human";
+// };
