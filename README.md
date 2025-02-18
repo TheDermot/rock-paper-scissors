@@ -60,7 +60,7 @@ To run this project locally, follow these steps:
     bash
     Copy
 
-    git clone https://github.com/your-username/rock-paper-scissors-game.git
+    git clone https://github.com/TheDermot/rock-paper-scissors.git
 
     Navigate to the Project Directory:
     bash
@@ -115,9 +115,10 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
+
 Acknowledgements
 
-    Pixel Art Assets: Sourced from https://brackeysgames.itch.io/brackeys-platformer-bundle, https://creativekind.itch.io/necromancer-free, https://edermunizz.itch.io/free-pixel-art-forest
+    Pixel Art Assets: Sourced from https://brackeysgames.itch.io/brackeys-platformer-bundle, https://creativekind.itch.io/necromancer-free, https://edermunizz.itch.io/free-pixel-art-     forest
 
     Inspiration: Inspired by classic Rock, Paper, Scissors games and pixel art aesthetics.
 
@@ -125,7 +126,7 @@ Acknowledgements
 
 Live Demo
 
-Play the game live here: GitHub Pages Link
+Play the game live here: [GitHub Pages Link](https://thedermot.github.io/rock-paper-scissors/)
 Contact
 
 If you have any questions or feedback, feel free to reach out:
