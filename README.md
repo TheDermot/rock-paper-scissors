@@ -126,7 +126,8 @@ Acknowledgements
 
 Live Demo
 
-Play the game live here: [GitHub Pages Link](https://thedermot.github.io/rock-paper-scissors/)
+Play the game live here: [PLAY](https://thedermot.github.io/rock-paper-scissors/)
+
 Contact
 
 If you have any questions or feedback, feel free to reach out:
